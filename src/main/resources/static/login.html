@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Purple_loginform Website Template | Home :: w3layouts</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<!-- css -->
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+<!-- js -->
+<script>var __links = document.querySelectorAll('a');function __linkClick(e) { parent.window.postMessage(this.href, '*');} ;for (var i = 0, l = __links.length; i < l; i++) {if ( __links[i].getAttribute('data-t') == '_blank' ) { __links[i].addEventListener('click', __linkClick, false);}}</script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>$(document).ready(function(c) {
+	$('.alert-close').on('click', function(c){
+		$('.message').fadeOut('slow', function(c){
+	  		$('.message').remove();
+		});
+	});	  
+});
+</script>
+</head>
+<body>
+<!-- contact-form -->	
+<div class="message warning">
+<div class="inset">
+	<div class="login-head">
+		<h1>Never give up!</h1>
+		 <div class="alert-close"> </div> 			
+	</div>
+		<form>
+			<li>
+				<input type="text" class="text" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}"><a href="#" class=" icon user"></a>
+			</li>
+				<div class="clear"> </div>
+			<li>
+				<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
+			</li>
+			<div class="clear"> </div>
+			<div class="submit">
+				<input type="submit" onclick="myFunction()" value="登 录" >
+				<h4><a style="cursor: pointer;" data-toggle="modal" data-target="#myModal">忘记密码?</a></h4>
+				<h4><a href="account.html">注册</a></h4>
+				<div class="clear">  </div>	
+			</div>
+				
+		</form>
+		</div>					
+	</div>
+	</div>
+	<div class="clear"> </div>
+<!--- footer --->
+<div class="footer">
+	<p>Copyright &copy; 2018.</p><button type="button" class="btn btn-default btn-xs">
+</button>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header reset-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title reset-title" id="myModalLabel">
+					修改密码
+				</h4>
+			</div>
+			<div>
+				<input type="text" class="modal-body" value="请输入账号/手机号" style="border-bottom:1px solid #e5e5e5;width: 100%;" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone number';}"></input>
+				<input type="text" class="modal-body" value="请输入验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'validate';}"></input>
+				<input type="button" class="btn btn-primary" value="获取验证码" style="background-color: #6D4A70;margin-left: 11%;;"></input>
+				<input type="text" class="modal-body" value="请重新设置密码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone number';}" style="border-bottom:1px solid #e5e5e5;width: 100%;border-top:1px solid #e5e5e5;width: 100%;"></input>
+				<input type="text" class="modal-body" value="请确认密码"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone number';}" style="border-bottom:1px solid #e5e5e5;width: 100%;"></input>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" style="background-color:#6D4A70;">
+					提交更改
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+</body>
+</html>

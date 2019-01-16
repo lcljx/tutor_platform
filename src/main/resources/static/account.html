@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Purple_loginform Website Template | Home :: w3layouts</title>
+<!-- css -->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<!-- -->
+<script>var __links = document.querySelectorAll('a');function __linkClick(e) { parent.window.postMessage(this.href, '*');} ;for (var i = 0, l = __links.length; i < l; i++) {if ( __links[i].getAttribute('data-t') == '_blank' ) { __links[i].addEventListener('click', __linkClick, false);}}</script>
+<script src="js/jquery.min.js"></script>
+<script>$(document).ready(function(c) {
+	$('.alert-close').on('click', function(c){
+		$('.message').fadeOut('slow', function(c){
+	  		$('.message').remove();
+		});
+	});	  
+});
+</script>
+<style>
+@font-face {
+  font-family: 'iconfont';  /* project id 981896 */
+  src: url('//at.alicdn.com/t/font_981896_m8fv33t9aal.eot');
+  src: url('//at.alicdn.com/t/font_981896_m8fv33t9aal.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_981896_m8fv33t9aal.woff') format('woff'),
+  url('//at.alicdn.com/t/font_981896_m8fv33t9aal.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_981896_m8fv33t9aal.svg#iconfont') format('svg');
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.1px;
+    -moz-osx-font-smoothing: grayscale;}
+</style>
+</head>
+<body>
+<!-- contact-form -->	
+<div class="message warning">
+<div class="inset">
+	<div class="login-head">
+		<a href="login.html">返回登录</a>
+		 <div class="alert-close"> </div> 			
+	</div>
+		<form>
+			<li>
+				<input type="text" class="text" value="请输入用户名(4-8个英文字符)" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}"><a href="#" class=" icon user"></a>
+			</li>
+				<div class="clear"> </div>
+			<li>
+				<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
+			</li>
+			<div class="clear"> </div>
+			<li>
+				<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
+			</li>
+			<div class="clear"> </div>
+			<li>
+				<input type="text"  value="注册手机号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone number';}"><a href="#" class="icon lock"></a>
+			</li>
+			<div class="clear"> </div>
+			<li>
+					<input type="text" style="width: 50%;" value="验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone number';}">
+					<label><input name="vcode" id="validate" type="button" class="validate"  onclick="" value="获取验证码" style="float: right;" ></label>
+					<div class="clear"> </div>
+			</li>
+			<div class="clear"> </div>
+			<div class="submit">
+				<label><input name="role" type="radio" class="role">普通用户</input></label>
+				<label><input name="role" type="radio" class="role">教师</input></label>
+				<label><input name="role" type="submit" onclick="myFunction()" value="注 册" ></label>
+				<div class="clear">  </div>	
+			</div>
+				
+		</form>
+		</div>					
+	</div>
+	</div>
+	<div class="clear"> </div>
+	<!--- footer --->
+	<div class="footer">
+		<p>Copyright &copy; 2018.</p>
+	</div>
+
+</body>
+</html>
