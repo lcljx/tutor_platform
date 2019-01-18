@@ -18,6 +18,51 @@
 	});	  
 });
 </script>
+<script>
+	
+	function getValiCode(){
+		var pNum = $(".phoneNum").val();
+		$("#validate").css({"background-color":"white","color":"black"});
+		$("#validate").val("验证码已发送");
+		$.ajax({
+	          //几个参数需要注意一下
+              type: "POST",//方法类型
+              dataType: "json",//预期服务器返回的数据类型
+              url: "/user/sendCode" ,//url
+              data: pNum,
+			  contentType:"application/json",
+              success: function (result) {
+              	console.log(result);//打印服务端返回的数据(调试用)
+              	if(result.result == 0){
+              		
+              		alert("成功发送验证码,请注意查收");
+              	}else{
+              		alert("错误代码："+result.result+" 错误信息："+result.errmsg);
+              	}
+              },
+              error : function() {
+                  alert("异常！");
+              }
+		 });
+	}
+	
+	function register(){
+		
+		 $.ajax({
+	            //几个参数需要注意一下
+	                type: "POST",//方法类型
+	                dataType: "json",//预期服务器返回的数据类型
+	                url: "/user/register" ,//url
+	                data: $('#register').serialize(),
+	                success: function (result) {
+	                   alert(result);
+	                },
+	                error : function() {
+	                    alert("异常！");
+	                }
+	            });
+	}
+</script>
 <style>
 @font-face {
   font-family: 'iconfont';  /* project id 981896 */
@@ -43,33 +88,33 @@
 		<a href="login.html">返回登录</a>
 		 <div class="alert-close"> </div> 			
 	</div>
-		<form>
+		<form id="register">
 			<li>
-				<input type="text" class="text" value="请输入用户名(4-8个英文字符)" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}"><a href="#" class=" icon user"></a>
+				<input name="userName" type="text" class="username" value="请输入用户名(4-8个英文字符)" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}"><a href="#" class=" icon user"></a>
 			</li>
 				<div class="clear"> </div>
 			<li>
-				<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
+				<input name="pass" type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
 			</li>
 			<div class="clear"> </div>
 			<li>
-				<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
+				<input name="rePass" type="password" value="rePassword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'rePassword';}"> <a href="#" class="icon lock"></a>
 			</li>
 			<div class="clear"> </div>
 			<li>
-				<input type="text"  value="注册手机号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone number';}"><a href="#" class="icon lock"></a>
+				<input class="phoneNum" name="phoneNum" type="text"  value="注册手机号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone number';}"><a href="#" class="icon lock"></a>
 			</li>
 			<div class="clear"> </div>
 			<li>
-					<input type="text" style="width: 50%;" value="验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone number';}">
-					<label><input name="vcode" id="validate" type="button" class="validate"  onclick="" value="获取验证码" style="float: right;" ></label>
+					<input type="text" name="vcode" style="width: 50%;" value="验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone number';}">
+					<label><input id="validate" type="button" class="validate"  onclick="getValiCode()" value="获取验证码" style="float: right;" ></label>
 					<div class="clear"> </div>
 			</li>
 			<div class="clear"> </div>
 			<div class="submit">
-				<label><input name="role" type="radio" class="role">普通用户</input></label>
-				<label><input name="role" type="radio" class="role">教师</input></label>
-				<label><input name="role" type="submit" onclick="myFunction()" value="注 册" ></label>
+				<label><input name="role" type="radio" class="role" value="1">普通用户</input></label>
+				<label><input name="role" type="radio" class="role" value="2">教师</input></label>
+				<label><input id="rg" type="button" onclick="register()" value="注 册" ></label>
 				<div class="clear">  </div>	
 			</div>
 				

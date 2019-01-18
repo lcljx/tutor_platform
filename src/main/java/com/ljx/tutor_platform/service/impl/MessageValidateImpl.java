@@ -3,13 +3,20 @@ package com.ljx.tutor_platform.service.impl;
 import java.io.IOException;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties.Jedis;
+import org.springframework.stereotype.Service;
 
 import com.github.qcloudsms.SmsMultiSender;
 import com.github.qcloudsms.SmsMultiSenderResult;
 import com.github.qcloudsms.httpclient.HTTPException;
-
-public class MessageValidate {
+import com.ljx.tutor_platform.service.MessageValidate;
+@Service
+public class MessageValidateImpl implements MessageValidate{
 	// 短信应用SDK AppID
 	private static int appid = 1400180887; // 1400开头
 
@@ -27,16 +34,25 @@ public class MessageValidate {
     // 签名参数使用的是`签名内容`，而不是`签名ID`
     private static String smsSign = "";
 	
-	public String sendMsg(String[] phoneNumbers) {
+	public String sendMsg(String[] phoneNumbers,HttpServletRequest request) {
+		JSONObject json = null;
 		SmsMultiSenderResult result = null;
 		// 需要发送短信的手机号码:phoneNumbers
 		// 指定模板ID单发短信
         try {
         	String code = getCode();
-            String[] params = {"5678"};
+            String[] params = {code};
             SmsMultiSender msender = new SmsMultiSender(appid, appkey);
             result =  msender.sendWithParam("86", phoneNumbers,
                 templateId, params, smsSign, "", "");  // 签名参数未提供或者为空时，会使用默认签名发送短信
+            //将验证码存到session中,同时存入创建时间
+            //以json存放，这里使用的是阿里的fastjson
+            HttpSession session = request.getSession();
+            json = new JSONObject();
+            json.put("code", code);
+            json.put("createTime", System.currentTimeMillis());
+            // 将认证码存入SESSION
+            request.getSession().setAttribute("code", json);
         } catch (HTTPException e) {
             // HTTP响应码错误
             e.printStackTrace();

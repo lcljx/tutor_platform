@@ -1,40 +1,41 @@
 package com.ljx.tutor_platform.entity;
 
 public class User {
-    String username;
-    String password;
-    String patternLock;
- 
-    public String getUsername() {
-        return username;
-    }
- 
-    public void setUsername(String username) {
-        this.username = username;
-    }
- 
-    public String getPassword() {
-        return password;
-    }
- 
-    public void setPassword(String password) {
-        this.password = password;
-    }
- 
-    public String getPatternLock() {
-        return patternLock;
-    }
- 
-    public void setPatternLock(String patterLock) {
-        this.patternLock = patterLock;
-    }
- 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", patterLock='" + patternLock + '\'' +
-                '}';
-    }
+    private String userName;
+    private String pass;
+    private String rePass;
+    private String phoneNum;
+    private String  vcode;
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+	public String getRePass() {
+		return rePass;
+	}
+	public void setRePass(String rePass) {
+		this.rePass = rePass;
+	}
+	public String getPhoneNum() {
+		return phoneNum;
+	}
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
+	}
+	public String getVcode() {
+		return vcode;
+	}
+	public void setVcode(String vcode) {
+		this.vcode = vcode;
+	}
+    
+    
 }

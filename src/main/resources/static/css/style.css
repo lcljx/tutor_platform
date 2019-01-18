@@ -128,10 +128,10 @@ input[type="text"]:hover, input[type="password"]:hover{
 }
 .tlinks{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
 /*************************/
-.submit{
+.submit,#rg{
 	padding-top:3em;
 }
-input[type="submit"] {
+input[type="submit"],#rg {
 	float: left;
 	color: #fff;
 	cursor: pointer;
@@ -148,7 +148,7 @@ input[type="submit"] {
 	-moz-border-radius:0.5em;
 	-o-border-radius:0.5em;
 }
-input[type="submit"]:hover ,.validate:hover{
+input[type="submit"]:hover ,.validate:hover,#rg:hover{
 	background: #fff;
 	color:#6C496F;
 	border:2px solid #6C496F;
