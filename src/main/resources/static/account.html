@@ -4,12 +4,14 @@
 <title>Purple_loginform Website Template | Home :: w3layouts</title>
 <!-- css -->
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/bootstrapValidator.min.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 <!-- -->
 <script>var __links = document.querySelectorAll('a');function __linkClick(e) { parent.window.postMessage(this.href, '*');} ;for (var i = 0, l = __links.length; i < l; i++) {if ( __links[i].getAttribute('data-t') == '_blank' ) { __links[i].addEventListener('click', __linkClick, false);}}</script>
 <script src="js/jquery.min.js"></script>
+<script src="js/bootstrapValidator.min.js"></script>
 <script>$(document).ready(function(c) {
 	$('.alert-close').on('click', function(c){
 		$('.message').fadeOut('slow', function(c){
@@ -19,8 +21,120 @@
 });
 </script>
 <script>
+	$(function () {
+		$('#register').bootstrapValidator({
+			message: 'This value is not valid',
+			feedbackIcons:{
+				valid: 'glyphicon glyphicon-ok',
+				invalid: 'glyphicon glyphicon-remove',
+				validating: 'glyphicon glyphicon-refresh'
+			},
+			fields:{
+				userName:{
+					message: '用户名验证失败',
+					validators:{
+						notEmpty: {
+                            message: '用户名不能为空'
+                        },
+                        stringLength: {/*长度提示*/
+                            min: 4,
+                            max: 8,
+                            message: '用户名长度必须在4到8之间。'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_\.]+$/,
+                            message: '用户名由数字字母下划线和.组成'
+                        }
+					}
+				},
+				pass: {
+	                message:'密码无效',
+	                validators: {
+	                     notEmpty: {
+	                         message: '密码不能为空'
+	                     },
+	                     stringLength: {
+	                         min: 6,
+	                         max: 30,
+	                         message: '用户名长度必须在6到30之间'
+	                     },
+	                     different: {//不能和用户名相同
+	                         field: 'userName',//需要进行比较的input name值
+	                         message: '不能和用户名相同'
+	                     },
+	                     regexp: {
+	                         regexp: /^[a-zA-Z0-9_\.]+$/,
+	                         message: 'The username can only consist of alphabetical, number, dot and underscore'
+	                     }
+	                 }
+	             },
+	             rePass: {
+	                 message: '密码无效',
+	                 validators: {
+	                     notEmpty: {
+	                         message: '用户名不能为空'
+	                     },
+	                    // stringLength: {
+	                      //   min: 6,
+	                      //   max: 30,
+	                    //     message: '用户名长度必须在6到30之间。'
+	                    // },
+	                     identical: {//相同
+	                         field: 'pass',
+	                         message: '两次密码不一致'
+	                     },
+	                     different: {//不能和用户名相同
+	                         field: 'userName',
+	                         message: '不能和用户名相同'
+	                     },
+	                    // regexp: {//匹配规则
+	                     //    regexp: /^[a-zA-Z0-9_\.]+$/,
+	                     //    message: 'The username can only consist of alphabetical, number, dot and underscore'
+	                     //}
+	                 }
+	             },
+	             phoneNum: {
+	                 message: 'The phone is not valid',
+	                 validators: {
+	                     notEmpty: {
+	                         message: '手机号码不能为空'
+	                     },
+	                     stringLength: {
+	                         min: 11,
+	                         max: 11,
+	                         message: '请输入11位手机号码'
+	                     },
+	                     regexp: {
+	                         regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+	                         message: '请输入正确的手机号码'
+	                     }
+	                 }
+	             },
+	             vcode: {
+	                 message: '邀请码',
+	                 validators: {
+	                     notEmpty: {
+	                         message: '邀请码不能为空'
+	                     },
+	                     stringLength: {
+	                         min: 6,
+	                         max: 6,
+	                         message: '请输入正确长度的邀请码。'
+	                     },
+	                     regexp: {
+	                         regexp: /^[\d]{6}$/,
+	                         message: '请输入数字'
+	                     }
+	                 }
+	             }
+	            
+			}
+		})
+	});
+</script>
+<script>
 	
-	function getValiCode(){
+	function getValiCode(){	//提交登录
 		var pNum = $(".phoneNum").val();
 		$("#validate").css({"background-color":"white","color":"black"});
 		$("#validate").val("验证码已发送");
@@ -47,7 +161,12 @@
 	}
 	
 	function register(){
-		
+		var bootstrapValidator = $("#register").data('bootstrapValidator');
+		bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()){
+        	alert("表单验证错误");
+        	return;
+        }
 		 $.ajax({
 	            //几个参数需要注意一下
 	                type: "POST",//方法类型
@@ -88,45 +207,53 @@
 		<a href="login.html">返回登录</a>
 		 <div class="alert-close"> </div> 			
 	</div>
-		<form id="register">
+	<form id="register">
+		<div  class="form-group">
 			<li>
 				<input name="userName" type="text" class="username" value="请输入用户名(4-8个英文字符)" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}"><a href="#" class=" icon user"></a>
 			</li>
-				<div class="clear"> </div>
+			<div class="clear"> </div>
+		</div>
+		<div  class="form-group">
 			<li>
 				<input name="pass" type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
 			</li>
 			<div class="clear"> </div>
+		</div>
+		
+		<div  class="form-group">
 			<li>
-				<input name="rePass" type="password" value="rePassword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'rePassword';}"> <a href="#" class="icon lock"></a>
+				<input name="rePass" type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'rePassword';}"> <a href="#" class="icon lock"></a>
 			</li>
 			<div class="clear"> </div>
+		</div>
+		<div  class="form-group">
 			<li>
 				<input class="phoneNum" name="phoneNum" type="text"  value="注册手机号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone number';}"><a href="#" class="icon lock"></a>
 			</li>
 			<div class="clear"> </div>
+		</div>
+		<div  class="form-group">
 			<li>
 					<input type="text" name="vcode" style="width: 50%;" value="验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone number';}">
 					<label><input id="validate" type="button" class="validate"  onclick="getValiCode()" value="获取验证码" style="float: right;" ></label>
 					<div class="clear"> </div>
 			</li>
 			<div class="clear"> </div>
-			<div class="submit">
-				<label><input name="role" type="radio" class="role" value="1">普通用户</input></label>
-				<label><input name="role" type="radio" class="role" value="2">教师</input></label>
-				<label><input id="rg" type="button" onclick="register()" value="注 册" ></label>
-				<div class="clear">  </div>	
-			</div>
-				
-		</form>
-		</div>					
-	</div>
-	</div>
-	<div class="clear"> </div>
-	<!--- footer --->
-	<div class="footer">
-		<p>Copyright &copy; 2018.</p>
-	</div>
+		</div>
+		<div class="submit">
+			<label><input name="role" type="radio" class="role" value="1">普通用户</input></label>
+			<label><input name="role" type="radio" class="role" value="2">教师</input></label>
+			<label><input id="rg" type="button" onclick="register()" value="注 册" ></label>
+			<div class="clear">  </div>	
+		</div>
+			
+	</form>
+</div>					
+</div>
+<div class="clear"> </div>
+<!--- footer --->
+
 
 </body>
 </html>
