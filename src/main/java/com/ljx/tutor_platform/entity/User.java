@@ -6,6 +6,7 @@ public class User {
     private String rePass;
     private String phoneNum;
     private String  vcode;
+    private Integer role;
 	public String getUserName() {
 		return userName;
 	}
@@ -35,6 +36,12 @@ public class User {
 	}
 	public void setVcode(String vcode) {
 		this.vcode = vcode;
+	}
+	public Integer getRole() {
+		return role;
+	}
+	public void setRole(Integer role) {
+		this.role = role;
 	}
     
     

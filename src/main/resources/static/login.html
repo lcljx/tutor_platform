@@ -3,6 +3,7 @@
 <head>
 <title>Purple_loginform Website Template | Home :: w3layouts</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/bootstrapValidator.min.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
@@ -12,6 +13,7 @@
 <script>var __links = document.querySelectorAll('a');function __linkClick(e) { parent.window.postMessage(this.href, '*');} ;for (var i = 0, l = __links.length; i < l; i++) {if ( __links[i].getAttribute('data-t') == '_blank' ) { __links[i].addEventListener('click', __linkClick, false);}}</script>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrapValidator.min.js"></script>
 <script>$(document).ready(function(c) {
 	$('.alert-close').on('click', function(c){
 		$('.message').fadeOut('slow', function(c){
@@ -19,6 +21,57 @@
 		});
 	});	  
 });
+</script>
+<script>
+	$(function () {
+		$('#login').bootstrapValidator({
+			message: 'This value is not valid',
+			feedbackIcons:{
+				valid: 'glyphicon glyphicon-ok',
+				invalid: 'glyphicon glyphicon-remove',
+				validating: 'glyphicon glyphicon-refresh'
+			},
+			fields:{
+				userName:{
+					message: '用户名验证失败',
+					validators:{
+						notEmpty: {
+                            message: '用户名不能为空'
+                        },
+                        stringLength: {/*长度提示*/
+                            min: 4,
+                            max: 8,
+                            message: '用户名长度必须在4到8之间。'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_\.]+$/,
+                            message: '用户名由数字字母下划线和.组成'
+                        }
+					}
+				},
+				pass: {
+	                message:'密码无效',
+	                validators: {
+	                     notEmpty: {
+	                         message: '密码不能为空'
+	                     },
+	                     stringLength: {
+	                         min: 6,
+	                         max: 30,
+	                         message: '用户名长度必须在6到30之间'
+	                     },
+	                     regexp: {
+	                         regexp: /^[a-zA-Z0-9_\.]+$/,
+	                         message: 'The username can only consist of alphabetical, number, dot and underscore'
+	                     }
+	                 }
+	             }
+	            
+	         
+	            
+			}
+		})
+	});
 </script>
 </head>
 <body>
@@ -29,14 +82,18 @@
 		<h1>Never give up!</h1>
 		 <div class="alert-close"> </div> 			
 	</div>
-		<form>
+		<form id="login">
+			<div class="form-group">
+				<li>
+					<input name="userName" type="text" class="text" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}"><a href="#" class=" icon user"></a>
+				</li>
+			</div>
+			<div class="clear"> </div>
+			<div class="form-group">
 			<li>
-				<input type="text" class="text" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}"><a href="#" class=" icon user"></a>
+				<input name="pass" type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
 			</li>
-				<div class="clear"> </div>
-			<li>
-				<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
-			</li>
+			</div>
 			<div class="clear"> </div>
 			<div class="submit">
 				<input type="submit" onclick="myFunction()" value="登 录" >
