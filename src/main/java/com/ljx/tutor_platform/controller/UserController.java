@@ -28,7 +28,7 @@ public class UserController{
     	String result = "";
         JSONObject json = (JSONObject)request.getSession().getAttribute("code");
         try {
-        	String code =  json.getString("code");
+        	
 			if(!json.getString("code").equals(user.getVcode())){
 			    return "验证码错误";
 			}else if((System.currentTimeMillis() - json.getLong("createTime")) > 1000 * 60 * 5){
