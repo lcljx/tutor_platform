@@ -15,6 +15,7 @@ public class User {
     private String createTime;
     private String updateTime;
     private String lastLoginTime;
+    private String trueName;
     private String  vcode;
     private Integer role;
 	public String getUserName() {
@@ -112,6 +113,12 @@ public class User {
 	}
 	public void setLastLoginTime(String lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
+	}
+	public String getTrueName() {
+		return trueName;
+	}
+	public void setTrueName(String trueName) {
+		this.trueName = trueName;
 	}
     
     

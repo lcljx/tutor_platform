@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>后台管理页面</title>
+		<link rel="stylesheet" type="text/css" href="../easyui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
+		<link rel="stylesheet" type="text/css" href="../css2/manage/clock.css"/>
+		<script type="text/javascript" src="../easyui/jquery.min.js"></script>
+		<script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="../easyui/locale/easyui-lang-zh_CN.js"></script>
+		<script src="../js/manage/main.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+		var cUser;
+			$(function(){
+				$.ajax({
+					url : '../user/currentUser',
+					type : 'POST',
+					dataType : 'json',
+					data : "currentUser",
+					success : function(result){
+						
+						cUser = result.userName;
+						console.log(cUser);
+						$(".currentUser").text(result.userName);
+						$(".trueName").text(result.trueName);
+						
+						$("#username").val()=result.userName;
+					},
+					error : function(result){
+						alert(result);
+					}
+					
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div style="margin:20px 0;"></div>
+		<div class="easyui-layout" style="width:100%;height:880px;">
+			<div data-options="region:'north'" style="height:50px;line-height: 30px;">
+				<table style="padding: 5px" width="100%">
+					<tr>
+						<td width="50%">
+							<b style="padding: 0 10px;font-size: 18px;">大学生家教平台后台管理系统!</b>
+						</td>
+						<td valign="bottom" align="right" width="50%">
+							<font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>【<span class="currentUser"></span>】</font>【<span class="trueName"></span>】【<span class="rolename">管理员</span>】
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div data-options="region:'south',split:true" style="height:50px;line-height: 45px;text-align: center;">
+				Copyright &copy; 2019 大学生家教平台后台管理系统.
+			</div>
+			<div data-options="region:'west',split:true" title="导航栏" style="width:200px;">
+				<div class="easyui-accordion" data-options="fit:true,border:false">
+					
+					<div title="类别管理" data-options="selected:true,iconCls:'icon-more'" style="padding: 10px">
+						<a href="javascript:openTab('前台类型','category/frontcategory','icon-more')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-more'" style="width: 150px">前台类型</a>
+						<a href="javascript:openTab('课程类型','category/classcategory','icon-more')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-more'" style="width: 150px">课程类型</a>
+						<a href="javascript:openTab('任务类型','category/classcategory','icon-more')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-more'" style="width: 150px">任务类型</a>
+						<a href="javascript:openTab('抽成类别','category/cutategory','icon-more')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-more'" style="width: 150px">抽成类型</a>
+					</div>	
+					
+					<!--我还没想好 先放着吧-->
+					<div title="课程任务管理" data-options="selected:true,iconCls:'icon-yxgl'" style="padding: 10px">
+						<a href="javascript:openTab('课程管理','saleChanceManage','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px">课程管理</a>
+						<a href="javascript:openTab('任务管理','saleChanceManage','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px">任务管理</a>
+					</div>	
+					
+					<div title="运营管理" data-options="selected:true,iconCls:'icon-yxgl'" style="padding: 10px">
+						<a href="javascript:openTab('抽成管理','saleChanceManage','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px">抽成管理</a>
+						<a href="javascript:openTab('订单管理','saleChanceManage','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px">订单管理</a>
+						<a href="javascript:openTab('收益分析表','operation_management/analyse','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px">收益分析表</a>
+					</div>	
+					
+					<div title="公告反馈" data-options="selected:true,iconCls:'icon-yxgl'" style="padding: 10px">
+						<a href="javascript:openTab('公告管理','feedback_publish/publish','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px">公告管理</a>
+						<a href="javascript:openTab('反馈管理','feedback_publish/feedback','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px">反馈管理</a>
+					</div>	
+					
+					<div title="人员信息管理" data-options="selected:true,iconCls:'icon-yxgl'" style="padding: 10px">
+						<a href="javascript:openTab('管理员信息','saleChanceManage','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px">管理员信息</a>
+						<a href="javascript:openTab('学生用户信息','cusdevplanManage','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px">学生用户信息</a>
+						<a href="javascript:openTab('教师用户信息','cusdevplanManage','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px">教师用户信息</a>
+					</div>
+					
+					<div title="权限管理" data-options="selected:true,iconCls:'icon-yxgl'" style="padding: 10px">
+						<a href="javascript:openTab('权限分配','saleChanceManage','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px">权限分配</a>
+					</div>
+					
+					<div title="系统管理"  data-options="iconCls:'icon-item'" style="padding:10px">
+						<a href="javascript:openPasswordModifyDialog(cUser)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-modifyPassword'" style="width: 150px;">修改密码</a>
+						<a href="javascript:logout()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">安全退出</a>
+						<a href="javascript:openTab('个人基础信息','cusdevplanManage','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px">个人基础信息</a>
+					</div>
+				</div>
+			</div>
+			<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
+				<div class="easyui-tabs" fit="true" border="false" id="tabs">
+					<div title="首页">
+						<div align="center" style="padding-top: 100px">
+							<font color="red" size="10">欢迎使用!</font>
+						<div class='clock-wrapper'>
+						<div class='clock-border'>
+						    <div class='clock'>
+						        <ul class='minute-marks'>
+						            <li class='five'></li>
+						            <li></li>
+						            <li></li>
+						            <li></li>
+						            <li></li>
+						            <li class='five'></li>
+						            <li></li>
+						            <li></li>
+						            <li></li>
+						            <li></li>
+						            <li class='five'></li>
+						            <li></li>
+						            <li></li>
+						            <li></li>
+						            <li></li>
+						            <li class='five'></li>
+						            <li></li>
+						            <li></li>
+						            <li></li>
+						            <li></li>
+						            <li class='five'></li>
+						            <li></li>
+						            <li></li>
+						            <li></li>
+						            <li></li>
+						            <li class='five'></li>
+						            <li></li>
+						            <li></li>
+						            <li></li>
+						            <li></li>
+						        </ul>
+						        <div class='hour'>
+						            <div class='hand'></div>
+						        </div>
+						        <div class='minute'>
+						            <div class='hand'></div>
+						        </div>
+						        <div class='second'>
+						            <div class='hand'></div>
+						        </div>
+						    </div>
+						</div>
+						</div>
+						</div>
+					</div>
+				</div>  	
+			</div>
+		</div>
+		
+		<div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding: 10px 20px"
+		   closed="true" buttons="#dlg-buttons">
+		   
+		   <form id="fm" method="post">
+			<table cellspacing="8px">
+				<tr>
+					<td>用户名：</td>
+					<td><input type="text" id="username" name="username" readonly="readonly" value="" style="width: 200px"/></td>
+				</tr>
+				<tr>
+					<td>原密码：</td>
+					<td><input type="password" id="oldPassword" name="oldPassword" class="easyui-validatebox" required="true" style="width: 200px"/></td>
+				</tr>
+				<tr>
+					<td>新密码：</td>
+					<td><input type="password" id="newPassword" name="newPassword" class="easyui-validatebox" required="true" style="width: 200px"/></td>
+				</tr>
+				<tr>
+					<td>确认新密码：</td>
+					<td><input type="password" id="newPassword2" name="newPassword2" class="easyui-validatebox" required="true" style="width: 200px"/></td>
+				</tr>
+			</table>
+		   </form>
+		 </div>
+
+		 <div id="dlg-buttons">
+			<a href="javascript:modifyPassword()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+			<a href="javascript:closePasswordModifyDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+		 </div>
+	</body>
+</html>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 反馈和公告的mapper -->
+<mapper namespace="com.ljx.tutor_platform.dao.PublishAndFeedBackDao">
+    <resultMap id="pmap" type="com.ljx.tutor_platform.entity.Publish">
+        <result property="publishName" column="publish_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="userName" column="create_user"/>
+        <result property="contact" column="contact"/>
+    </resultMap>
+    <select id="findPublishByName" resultMap="pmap">
+        select * from user where publish_name=#{publishName};
+    </select>
+    
+    <insert id="addPublish" parameterType="com.ljx.tutor_platform.entity.Publish" keyProperty="id" useGeneratedKeys="true">
+    	insert into publish (publish_name,content,create_time,create_user,contact)
+    	 values(#{publishName},#{content},#{createTime},#{userName},#{contact})
+    </insert>
+   
+   <select id="findPublishList" parameterType="map" resultMap="pmap">
+		select * from publish
+		<where>
+			<if test="publishName!=null and publishName!='' ">
+				and publish_name like '%${publishName}%'
+			</if>
+		</where>
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+	<!-- 获取条数 -->
+	<select id="getTotal" parameterType="Map" resultType="Long">
+		select count(*) from publish
+		<where>
+			<if test="publishName!=null and publishName!='' ">
+				and publish_name like '%${publishName}%'
+			</if>
+		</where>
+	</select>
+   
+   	<delete id="delPublishByid" parameterType="String">
+   		delete from publish where id=#{id}
+   	</delete>    
+   
+	<update id="updatePublishByid" parameterType="com.ljx.tutor_platform.entity.Publish">
+	 	  update publish
+	 	  <set>
+			<if test="publishName!=null and publishName!='' ">
+				publish_name=#{publishName},
+			</if>
+			<if test="content!=null and content!='' ">
+				content=#{content},
+			</if>
+	 	  </set>
+	 	  where  id=#{id}
+	</update>
+
+	<!-- 以下是Contact联系我们 -->
+	<resultMap id="cmap" type="com.ljx.tutor_platform.entity.Contact">
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+	<insert id="addFeedback" parameterType="com.ljx.tutor_platform.entity.Contact" keyProperty="id" useGeneratedKeys="true">
+    	insert into contact (name,email,title,message,create_time)
+    	 values(#{name},#{email},#{title},#{message},#{createTime})
+    </insert>
+    
+    <select id="findFeedbacks" parameterType="map" resultMap="cmap">
+		select * from contact
+		<where>
+			<if test="title!=null and title!='' ">
+				and title like '%${title}%'
+			</if>
+		</where>
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+	<!-- 获取条数 -->
+	<select id="getContactTotal" parameterType="Map" resultType="Long">
+		select count(*) from contact
+		<where>
+			<if test="title!=null and title!='' ">
+				and title like '%${title}%'
+			</if>
+		</where>
+	</select>
+    
+</mapper>

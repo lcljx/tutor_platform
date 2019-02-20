@@ -10,14 +10,33 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
         <result property="lastLoginTime" column="last_login_time"/>
+        <result property="trueName" column="true_name"/>
     </resultMap>
     <select id="findUserByUsername" resultMap="userMap">
         select * from user where username=#{userName};
     </select>
     
     <insert id="addUser" parameterType="com.ljx.tutor_platform.entity.User" keyProperty="id" useGeneratedKeys="true">
-    	insert into user values(#{id},#{userName},#{nickName},#{pass},
-    	#{salt},#{email},#{phoneNum},#{sex},#{age},
-    	#{status},#{createTime},#{updateTime},#{lastLoginTime})
+    	insert into user (id,username,nick_name,password,salt,email,phone,sex,age,status,create_time,update_time,last_login_time)
+    	 values(#{id},#{userName},#{nickName},#{pass},#{salt},#{email},#{phoneNum},#{sex},#{age},#{status},#{createTime},#{updateTime},#{lastLoginTime})
     </insert>
+    
+    <select id="getPasswordByUserName" resultType="String">
+    	 select password from user where username=#{userName};
+    </select>
+    
+    <select id="getSaltByUsername" resultType="String">
+    	 select salt from user where username=#{userName};
+    </select>
+   
+	<update id="modifyPassword">
+	 	  update user
+	 	  <set>
+			<if test="password!=null and password!=''">
+				password=#{password},
+			</if>
+	 	  </set>
+	 	  where  username=#{username}
+	</update>
+
 </mapper>

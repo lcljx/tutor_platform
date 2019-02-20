@@ -3,15 +3,15 @@
 <head>
 <title>Purple_loginform Website Template | Home :: w3layouts</title>
 <!-- css -->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/bootstrapValidator.min.css" rel="stylesheet" type="text/css">
+<link href="css2/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css2/bootstrapValidator.min.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 <!-- -->
 <script>var __links = document.querySelectorAll('a');function __linkClick(e) { parent.window.postMessage(this.href, '*');} ;for (var i = 0, l = __links.length; i < l; i++) {if ( __links[i].getAttribute('data-t') == '_blank' ) { __links[i].addEventListener('click', __linkClick, false);}}</script>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrapValidator.min.js"></script>
+<script src="js2/jquery.min.js"></script>
+<script src="js2/bootstrapValidator.min.js"></script>
 <script>$(document).ready(function(c) {
 	$('.alert-close').on('click', function(c){
 		$('.message').fadeOut('slow', function(c){
@@ -174,7 +174,10 @@
 	                url: "/user/register" ,//url
 	                data: $('#register').serialize(),
 	                success: function (result) {
-	                   alert(result);
+	                	if(result == "恭喜您注册成功，可以登录啦"){
+	                   		alert(result);
+	                   		window.location.href='login.html';
+	                	}
 	                },
 	                error : function(result) {
 	                    alert("异常！"+result);
@@ -242,8 +245,6 @@
 			<div class="clear"> </div>
 		</div>
 		<div class="submit">
-			<label><input name="role" type="radio" class="role" value="1">普通用户</input></label>
-			<label><input name="role" type="radio" class="role" value="2">教师</input></label>
 			<label><input id="rg" type="button" onclick="register()" value="注 册" ></label>
 			<div class="clear">  </div>	
 		</div>

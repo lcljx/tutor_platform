@@ -24,4 +24,22 @@ public class UserServiceImpl implements UserService{
 		return userDao.findUserByUsername(userName);
 	}
 
+	@Override
+	public String findSaltByUsername(String username) {
+		// TODO Auto-generated method stub
+		return userDao.getSaltByUsername(username);
+	}
+
+	@Override
+	public boolean modifyPassword(String username, String password) {
+		// TODO Auto-generated method stub
+		return userDao.modifyPassword(username,password);
+	}
+
+	@Override
+	public String findPassByUsername(String username) {
+		// TODO Auto-generated method stub
+		return userDao.getPasswordByUserName(username);
+	}
+
 }

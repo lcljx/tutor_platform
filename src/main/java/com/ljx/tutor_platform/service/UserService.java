@@ -7,4 +7,10 @@ public interface UserService {
 	public void addUser(User user);
 
 	public User findUserByUsername(String userName);
+
+	public String findSaltByUsername(String username);
+
+	public boolean modifyPassword(String username, String password);
+
+	public String findPassByUsername(String username);
 }
