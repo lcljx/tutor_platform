@@ -24,4 +24,8 @@ public interface PublishAndFeedBackService {
 
 	Long getContactTotal(Map<String, Object> map);
 
+	boolean delFeedbackByid(String id);
+
+	List<Contact> showContacts();
+
 }

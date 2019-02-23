@@ -108,13 +108,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading text-center mx-auto wow fadeInUp" data-wow-delay="300ms">
-                        <span>最好的</span>
-                        <h3>课程分类</h3>
+                        <span>The Best</span>
+                        <h3>Top Popular Courses</h3>
                     </div>
                 </div>
             </div>
-            <div class="row" id="cousetype">
-            	<!-- 这里是主要的课程类别 -->
+            <div class="row" id="primaryCourse">
+				<!-- 这是小学课程 -->
             </div>
         </div>
     </div>
@@ -124,17 +124,21 @@
     <div class="popular-course-details-area wow fadeInUp" data-wow-delay="300ms">
         <div class="single-top-popular-course d-flex align-items-center flex-wrap">
             <div class="popular-course-content">
-                <h5>Business for begginers</h5>
-                <span>By Simon Smith   |  March 18, 2018</span>
+                <h5>励学篇</h5>
+                <span>By 赵恒   | 北宋 宋.真宗</span>
                 <div class="course-ratings">
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
                 </div>
-                <p>Cras vitae turpis lacinia, lacinia lacus non, fermentum nisi. Donec et sollicitudin est, in euismod. Morbi vel arcu gravida, iaculis lacus vel, posuere ipsum. Sed faucibus mauris vitae urna consectetur, sit amet maximus nisl sagittis. Ut in iaculis enim, et pulvinar mauris. Etiam tristique magna eget velit consectetur, a tincidunt velit dictum. Cras vulputate metus id felis ornare hendrerit. Maecenas sodales suscipit ipsum.</p>
-                <a href="#" class="btn academy-btn btn-sm mt-15">See More</a>
+                <p>富家不用买良田，书中自有千钟粟。</p>
+				<p>安居不用架高楼，书中自有黄金屋。</p>
+				<p>娶妻莫恨无良媒，书中自有颜如玉。</p>
+				<p>出门莫恨无人随，书中车马多如簇。</p>
+				<p>男儿欲遂平生志，五经勤向窗前读。 </p>
+                
             </div>
             <div class="popular-course-thumb bg-img" style="background-image: url(img/bg-img/bg-4.jpg);"></div>
         </div>
@@ -303,35 +307,50 @@
     <script src="js/active.js"></script>
     <script src="js/public.js"></script>
     <script>
-	  //显示主要的课程类型
-	    $.ajax({
-			url : '../type/showCourseType',
-			type : 'POST',
-			dataType : 'json',
-			success : function(data){
-				console.log(data);
-				var len = data.length;
-				for(var i=0;i<len;i++){
-					 $("#cousetype").append(""
-				                +"<div class='col-12 col-lg-6'>"
-				                +    "<div class='single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp' data-wow-delay='400ms'>"
-				                +        "<div class='popular-course-content'>"
-				                +            "<h5>"+data[i].typeName+"</h5>"
-				                +            "<span></span>"
-				                +            "<p>"+data[i].describe+"</p>"
-				                +            "<a href='"+data[i].url+"' class='btn academy-btn btn-sm'>查看详情</a>"
-				                +        "</div>"
-				                +        "<div class='popular-course-thumb bg-img' style='background-image: url("+data[i].pic+");'></div>"
-				                +    "</div>"
-				                +"</div>"
-						);
-				}
-			},
-			error : function(){
-				alert("出了一些问题");
+    //主頁顯示熱門課程
+    $.ajax({
+		url : '../course/showCourseByType',
+		type : 'POST',
+		dataType : 'json',
+		data : {"courseType":"小学课程"},
+		success : function(data){
+			console.log(data);
+			var len = data.length;
+			for(var i=0;i<len;i++){
+				$("#primaryCourse").append(""
+					+"<div class='col-12 col-lg-6'>"
+	                +    "<div class='single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp' data-wow-delay='400ms'>"
+	                +        "<div class='popular-course-content'>"
+	                +            "<h5>"+data[i].courseName+"</h5>"
+	                +            "<span>By "+data[i].user.trueName+"   |  "+data[i].createTime+"</span>"
+	                +            "<div class='course-ratings ranks'>"
+	                +			 "<span class='rank_flag' style='display:none'>"+data[i].rank+"</span>"
+	                +            "</div>"
+	                +            "<h5>￥："+data[i].price+"元</h5>"
+	                +            "<p>"+data[i].courseDescribe+"</p>"
+	                +            "<a href='#' class='btn academy-btn btn-sm'>购买</a>"
+	                +        "</div>"
+	                +       "<div class='popular-course-thumb bg-img' style='background-image: url("+data[i].pic+");'></div>"
+	                +   "</div>"
+	                +"</div>"		
+				);
+				
 			}
 			
-		});
+			$(".ranks").each(function(index){
+				var ranks = $(this).first().text();
+				for(var i=0;i<ranks;i++){
+					$(this).append("<i class='fa fa-star' aria-hidden='true'></i>");
+				}
+				for(var i=0;i<5-ranks;i++){
+					$(this).append("<i class='fa fa-star-o' aria-hidden='true'></i>");
+				}
+			  });
+		},
+		error : function(){
+			alert("尚未登录");
+		}
+	});
     </script>
 </body>
 

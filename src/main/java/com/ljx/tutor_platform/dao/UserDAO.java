@@ -7,6 +7,8 @@ import com.ljx.tutor_platform.entity.User;
 public interface UserDAO {
     User findUserByUsername(String userName);
 
+    User findUserByid(String id);
+    
 	boolean addUser(User user);
 
 	String getPasswordByUserName(String userName);

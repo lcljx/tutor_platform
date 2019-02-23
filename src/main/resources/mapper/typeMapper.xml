@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- course的mapper -->
+<mapper namespace="com.ljx.tutor_platform.dao.TypeDao">
+    <resultMap id="typemap" type="com.ljx.tutor_platform.entity.TutorType">
+    	<result property="id" column="id"/>
+        <result property="tutorType" column="tutor_type"/>
+        <result property="createTime" column="create_time"/>
+        <result property="typeName" column="type_name"/>
+        <result property="describe" column="describes"/>
+        <result property="trueName" column="create_user"/>
+        <result property="phone" column="phone"/>
+        <result property="pic" column="pic"/>
+    </resultMap>
+    <select id="showCourseType" parameterType="java.lang.String" resultMap="typemap">
+        select * from tutor_type where tutor_type=#{flag}
+    </select>
+    
+    <insert id="addTypes" parameterType="com.ljx.tutor_platform.entity.TutorType" keyProperty="id" useGeneratedKeys="true">
+	    	insert into tutor_type 
+	    	(
+		    	tutor_type,
+		    	type_name,
+		    	describes,
+		    	create_time,
+		    	create_user,
+		    	phone,
+		    	url
+	    	)
+	    	 values(
+	    	 #{tutorType},
+	    	 #{typeName},
+	    	 #{describe},
+	    	 #{createTime},
+	    	 #{trueName},
+	    	 #{phone},
+	    	 #{url}
+    	 )
+    </insert>
+    
+    <select id="findTypeList" parameterType="map" resultMap="typemap">
+		select * from tutor_type
+		<where>
+			<if test="typeName!=null and typeName!='' ">
+				and type_name like '%${typeName}%'
+			</if>
+			
+			<if test="tutorType!=null and tutorType!='' ">
+				and tutor_type=#{tutorType}
+			</if>
+		</where>
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+	<!-- 获取条数 -->
+	<select id="getTotal" parameterType="Map" resultType="Long">
+		select count(*) from tutor_type
+		<where>
+			<if test="typeName!=null and typeName!='' ">
+				and type_name like '%${typeName}%'
+			</if>
+			<if test="tutorType!=null and tutorType!='' ">
+				and tutor_type=#{tutorType}
+			</if>
+		</where>
+	</select>
+	
+	<delete id="delType" parameterType="String">
+   		delete from tutor_type where id=#{id}
+   	</delete>
+   	
+   	<update id="editType" parameterType="com.ljx.tutor_platform.entity.TutorType">
+	 	  update tutor_type
+	 	  <set>
+			<if test="typeName!=null and typeName!='' ">
+				type_name=#{typeName},
+			</if>
+			<if test="describe!=null and describe!='' ">
+				describes=#{describe},
+			</if>
+			<if test="url!=null and url!='' ">
+				url=#{url},
+			</if>
+	 	  </set>
+	 	  where  id=#{id}
+	</update>
+</mapper>

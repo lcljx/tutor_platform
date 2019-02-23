@@ -56,5 +56,15 @@ public class PublishAndFeedBackServiceImpl implements PublishAndFeedBackService{
 		// TODO Auto-generated method stub
 		return pfDao.getContactTotal(map);
 	}
+	@Override
+	public boolean delFeedbackByid(String id) {
+		// TODO Auto-generated method stub
+		return  pfDao.delFeedbackByid(id);
+	}
+	@Override
+	public List<Contact> showContacts() {
+		// TODO Auto-generated method stub
+		return pfDao.showContacts();
+	}
 
 }

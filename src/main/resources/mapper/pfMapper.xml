@@ -85,5 +85,12 @@
 			</if>
 		</where>
 	</select>
+	
+	<delete id="delFeedbackByid" parameterType="String">
+   		delete from contact where id=#{id}
+   	</delete>  
     
+    <select id="showContacts" parameterType="map" resultMap="cmap">
+		SELECT * FROM contact order by create_time desc limit 0,4;
+	</select>
 </mapper>

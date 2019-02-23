@@ -49,7 +49,7 @@
 		   </form>
 		 </div>
 		<div id="dlg-buttons">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="savePublish()">Save</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="savePublish()">保存</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">Cancel</a>
 		</div>
 		<script>
@@ -107,7 +107,7 @@
 				var row = $('#dg').datagrid('getSelected');
 				console.log(row);
 				if (row){
-					$('#dlg').dialog('open').dialog('setTitle','Edit User');
+					$('#dlg').dialog('open').dialog('setTitle','编辑公告');
 					//$('#fm').form('load',row);
 					$('#publishname').val(row.publishName);
 					$('#publishcontent').val(row.content);

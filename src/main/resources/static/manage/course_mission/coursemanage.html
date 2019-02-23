@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css">
+		<link rel="stylesheet" type="text/css" href="../../css/manage/clock.css"/>
+		<script type="text/javascript" src="../../easyui/jquery.min.js"></script>
+		<script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="../../easyui/locale/easyui-lang-zh_CN.js"></script>
+		<script src="../../js/manage/main.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<table id="dg"  class="easyui-datagrid" style="width:100%;height:690px"
+				url="../../course/courseList"
+				toolbar="#toolbar"
+				rownumbers="true" fitColumns="true" singleSelect="true" pagination="true">
+			<thead>
+				<tr>
+					<th field="type" width="9%" formatter="formatDepartmentName">课程类别</th>
+					<th field="courseName" width="9%">课程名称</th>
+					<th field="courseDescribe" width="9%">课程内容</th>
+					<th field="price" width="9%">课程价格</th>
+					<th field="period" width="9%">课时</th>
+					<th field="status" width="9%">状态</th>
+					<th field="commission" width="9%">折扣</th>
+					<th field="rank" width="9%">推荐级别</th>
+					<th field="createTime" width="9%">创建时间</th>
+					<th field="userName" width="9%" formatter="createUser">创建人</th>
+					<th field="contact" width="9%" formatter="userPhone">联系方式</th>
+				</tr>
+			</thead>
+		</table>
+		<div id="toolbar">
+			<span>课程名称:</span>
+			<input id="coursename" style="line-height:26px;border:1px solid #ccc">
+			<span>推荐级别:</span>
+			<input id="tuijian" style="line-height:26px;border:1px solid #ccc">
+			<a href="#" class="easyui-linkbutton"  plain="true" onclick="doSearch()">搜索</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editCourse()">编辑</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="delCourse()">删除</a>
+		</div>
+		
+		<div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding: 10px 20px"
+		   closed="true" buttons="#dlg-buttons">
+		   
+		   <form id="fm" method="post">
+			<table cellspacing="8px">
+				<tr>
+					<td>课程名称：</td>
+					<td><input type="text" id="courseName" name="courseName" class="easyui-validatebox" required="true" style="width: 200px"/></td>
+				</tr>
+				<tr>
+					<td>状态：</td>
+					<td><input type="text" id="status" name="status" class="easyui-validatebox" required="true" style="width: 200px"/></td>
+				</tr>
+				<tr>
+					<td>折扣：</td>
+					<td><input type="text" id="commission" name="commission" class="easyui-validatebox" required="true" style="width: 200px"/></td>
+				</tr>
+				<tr>
+					<td>推荐级别：</td>
+					<td><input type="text" id="rank2" name="rank" class="easyui-validatebox" required="true" style="width: 200px"/></td>
+				</tr>
+			</table>
+		   </form>
+		 </div>
+		<div id="dlg-buttons">
+			
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveCourse()">保存</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+		</div>
+		<script>
+			function saveCourse(){
+				$('#fm').form('submit',{
+					url: url,
+					onSubmit: function(){
+						return $(this).form('validate');
+					},
+					success: function(result){
+						
+						if (!result){
+							$.messager.show({
+								title: 'Error',
+								msg: "操作失败"
+							});
+						} else {
+							alert("操作成功");
+							$('#dlg').dialog('close');		// close the dialog
+							$('#dg').datagrid('reload');	// reload the user data
+						}
+					}
+				});
+			}
+			
+			function delCourse(){
+				var row = $('#dg').datagrid('getSelected');
+				if (row){
+					$.messager.confirm('Confirm','你确定要删除该条信息么?',function(r){
+						if (r){
+							$.post('../../course/delCourse',{id:row.id},function(result){
+								if (result){
+									alert("成功删除");
+									$('#dg').datagrid('reload');	// reload the user data
+								} else {
+									$.messager.show({	// show error message
+										title: 'Error',
+										msg: result.errorMsg
+									});
+								}
+							},'json');
+							}
+					});
+				}
+			}
+			
+			//当编辑用户时，打开一个对话框并从 datagrid 选择的行中加载表单数据。
+			function editCourse(){
+				var row = $('#dg').datagrid('getSelected');
+				if (row){
+					$('#dlg').dialog('open').dialog('setTitle','编辑课程');
+					//$('#fm').form('load',row);
+					$('#rank').val(row.rank);
+					$('#courseName').val(row.courseName);
+					$('#commission').val(row.commission);
+					$('#status').val(row.status);
+					url = '../../course/editCourse?id='+row.id;
+				}
+			}
+			
+			
+			function formatDepartmentName(val,row,index){
+				return row.type.typeName;
+			}
+			
+			function createUser(val,row,index){
+				return row.user.trueName;
+			}
+			
+			function userPhone(val,row,index){
+				return row.user.phoneNum;
+			}	
+		</script>
+		<script>
+			function doSearch(){
+				console.log($('#rank2').val());
+				$('#dg').datagrid('load',{
+					courseName : $('#coursename').val(),
+					rank : $('#tuijian').val()
+				});
+			}
+		</script>
+	</body>
+</html>

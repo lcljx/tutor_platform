@@ -23,5 +23,9 @@ public interface PublishAndFeedBackDao {
 	boolean addFeedback(Contact contact);
 
 	List<Contact> findFeedbacks(Map<String, Object> map);
+
+	boolean delFeedbackByid(String id);
+
+	List<Contact> showContacts();
 	
 }

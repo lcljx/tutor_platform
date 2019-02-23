@@ -28,6 +28,10 @@
     <select id="getSaltByUsername" resultType="String">
     	 select salt from user where username=#{userName};
     </select>
+    
+    <select id="findUserByid" resultType="String">
+    	 select * from user where id=#{id}
+    </select>
    
 	<update id="modifyPassword">
 	 	  update user
