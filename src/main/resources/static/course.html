@@ -72,8 +72,8 @@
                                 <ul>
                                     <li><a href="index.html">首页</a></li>
                                     <li><a href="course.html">课程</a></li>
-                                    <li><a href="#">任务</a></li>
-                                    <li><a href="#">名师</a></li>
+                                    <li><a href="task.html">任务</a></li>
+                                    <li><a href="teacher.html">名师</a></li>
                                     <li><a href="about-us.html">关于我们</a></li>
                                     <li><a href="contact.html">联系我们</a></li>
                                 </ul>
@@ -308,6 +308,7 @@
 			url : '../type/showCourseType',
 			type : 'POST',
 			dataType : 'json',
+			data : {"flag" : "课程"},
 			success : function(data){
 				console.log(data);
 				var len = data.length;

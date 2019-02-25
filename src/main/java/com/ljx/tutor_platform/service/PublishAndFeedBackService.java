@@ -28,4 +28,6 @@ public interface PublishAndFeedBackService {
 
 	List<Contact> showContacts();
 
+	List<Publish> showPublish();
+
 }

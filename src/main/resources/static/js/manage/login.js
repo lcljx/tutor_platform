@@ -26,8 +26,8 @@ $(function(){
 	//提交时验证
 	$('#btn a').click(function(){
 		var data = {
-				"userName" : $('#admin').val(),
-				"pass" : $('#password').val()
+				"account" : $('#admin').val(),
+				"password" : $('#password').val()
 				};
 		if(!$('#admin').validatebox('isValid')){
 			$('#admin').focus();

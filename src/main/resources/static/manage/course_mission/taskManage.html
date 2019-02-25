@@ -12,33 +12,32 @@
 	</head>
 	<body>
 		<table id="dg"  class="easyui-datagrid" style="width:100%;height:690px"
-				url="../../course/courseList"
+				url="../../task/taskList"
 				toolbar="#toolbar"
 				rownumbers="true" fitColumns="true" singleSelect="true" pagination="true">
 			<thead>
 				<tr>
 					<th field="type" width="9%" formatter="formatDepartmentName">课程类别</th>
-					<th field="courseName" width="9%">课程名称</th>
-					<th field="courseDescribe" width="9%">课程内容</th>
-					<th field="price" width="9%">课程价格</th>
-					<th field="period" width="9%">课时</th>
-					<th field="status" width="9%">状态</th>
-					<th field="commission" width="9%">折扣</th>
-					<th field="rank" width="9%">推荐级别</th>
-					<th field="createTime" width="9%">创建时间</th>
-					<th field="userName" width="9%" formatter="createUser">创建人</th>
-					<th field="contact" width="9%" formatter="userPhone">联系方式</th>
+					<th field="taskName" width="10%">课程名称</th>
+					<th field="taskDescribe" width="10%">课程内容</th>
+					<th field="price" width="10%">课程价格</th>
+					<th field="period" width="10%">课时</th>
+					<th field="status" width="10%">状态</th>
+					<th field="ranks" width="10%">推荐级别</th>
+					<th field="createTime" width="10%">创建时间</th>
+					<th field="userName" width="10%" formatter="createUser">创建人</th>
+					<th field="contact" width="10%" formatter="userPhone">联系方式</th>
 				</tr>
 			</thead>
 		</table>
 		<div id="toolbar">
 			<span>课程名称:</span>
-			<input id="coursename" style="line-height:26px;border:1px solid #ccc">
+			<input id="taskname" style="line-height:26px;border:1px solid #ccc">
 			<span>推荐级别:</span>
 			<input id="tuijian" style="line-height:26px;border:1px solid #ccc">
 			<a href="#" class="easyui-linkbutton"  plain="true" onclick="doSearch()">搜索</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editCourse()">编辑</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="delCourse()">删除</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editTask()">编辑</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="delTask()">删除</a>
 		</div>
 		
 		<div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding: 10px 20px"
@@ -48,7 +47,7 @@
 			<table cellspacing="8px">
 				<tr>
 					<td>课程名称：</td>
-					<td><input type="text" id="courseName" name="courseName" class="easyui-validatebox" required="true" style="width: 200px"/></td>
+					<td><input type="text" id="taskName" name="taskName" class="easyui-validatebox" required="true" style="width: 200px"/></td>
 				</tr>
 				<tr>
 					<td>状态：</td>
@@ -67,11 +66,11 @@
 		 </div>
 		<div id="dlg-buttons">
 			
-			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveCourse()">保存</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveTask()">保存</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
 		</div>
 		<script>
-			function saveCourse(){
+			function saveTask(){
 				$('#fm').form('submit',{
 					url: url,
 					onSubmit: function(){
@@ -93,12 +92,12 @@
 				});
 			}
 			
-			function delCourse(){
+			function delTask(){
 				var row = $('#dg').datagrid('getSelected');
 				if (row){
 					$.messager.confirm('Confirm','你确定要删除该条信息么?',function(r){
 						if (r){
-							$.post('../../course/delCourse',{id:row.id},function(result){
+							$.post('../../task/delTask',{id:row.id},function(result){
 								if (result){
 									alert("成功删除");
 									$('#dg').datagrid('reload');	// reload the user data
@@ -115,16 +114,16 @@
 			}
 			
 			//当编辑用户时，打开一个对话框并从 datagrid 选择的行中加载表单数据。
-			function editCourse(){
+			function editTask(){
 				var row = $('#dg').datagrid('getSelected');
 				if (row){
 					$('#dlg').dialog('open').dialog('setTitle','编辑课程');
 					//$('#fm').form('load',row);
 					$('#rank').val(row.rank);
-					$('#courseName').val(row.courseName);
+					$('#taskName').val(row.taskName);
 					$('#commission').val(row.commission);
 					$('#status').val(row.status);
-					url = '../../course/editCourse?id='+row.id;
+					url = '../../task/editTask?id='+row.id;
 				}
 			}
 			
@@ -146,8 +145,8 @@
 				var s = $('#tuijian').val();
 				console.log(s);
 				$('#dg').datagrid('load',{
-					courseName : $('#coursename').val(),
-					rank : $('#tuijian').val()
+					taskName : $('#taskname').val(),
+					ranks : $('#tuijian').val()
 				});
 			}
 		</script>

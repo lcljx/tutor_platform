@@ -4,20 +4,41 @@ public class User {
 	private Integer id;
     private String userName;
     private String nickName;
+    
     private String pass;
     private String salt;
     private String rePass;
+    
     private String email;
     private String phoneNum;
     private Integer sex;
+     
     private Integer age;
     private Integer status;
     private String createTime;
+    
     private String updateTime;
     private String lastLoginTime;
     private String trueName;
+    
     private String  vcode;
-    private Integer role;
+    private String role;
+    
+    private String teacherCredits;
+    private String upic;
+    private String address;
+	public String getTeacherCredits() {
+		return teacherCredits;
+	}
+	public void setTeacherCredits(String teacherCredits) {
+		this.teacherCredits = teacherCredits;
+	}
+	public String getUpic() {
+		return upic;
+	}
+	public void setUpic(String upic) {
+		this.upic = upic;
+	}
 	public String getUserName() {
 		return userName;
 	}
@@ -48,10 +69,10 @@ public class User {
 	public void setVcode(String vcode) {
 		this.vcode = vcode;
 	}
-	public Integer getRole() {
+	public String getRole() {
 		return role;
 	}
-	public void setRole(Integer role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 	public Integer getId() {
@@ -119,6 +140,12 @@ public class User {
 	}
 	public void setTrueName(String trueName) {
 		this.trueName = trueName;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
     
     

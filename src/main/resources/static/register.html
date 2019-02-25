@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>大学生家教平台</title>
+	<link rel="stylesheet" href="css/auth.css">
+	<style>
+		.code{
+			background-color: #D0EF84;
+			color: var(--color-dark);
+			border: none;
+			border-radius: 3px;
+			padding: 15px 20px;
+			width: 32%;
+			outline: 0;
+			cursor:pointer;
+			font-weight: 600;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="lowin">
+		<div class="lowin-brand">
+			<img src="img/kodinger.jpg" alt="logo">
+		</div>
+		<div class="lowin-wrapper">
+			<div class="lowin-box lowin-register">
+				<div class="lowin-box-inner">
+					<div id="register">
+						<p>创建账户</p>
+						<div class="lowin-group">
+							<label>账号</label>
+							<input id="userName" type="text" name="userName" autocomplete="account" class="lowin-input">
+						</div>
+						<div class="lowin-group">
+							<label>手机号</label>
+							<input id="phoneNum" type="text" autocomplete="text" name="phone" class="lowin-input">
+						</div>
+						
+						<div class="lowin-group">
+							<label>验证码</label>
+							<input id="vcode" type="text" autocomplete="text" name="vcode" class="lowin-input"  style="width: 66%;"/>
+							<input id="btnSendCode" type="button" autocomplete="text" name="code" class="code" value="获取验证码" onclick="sendMessage()">
+						</div>
+						
+						<div class="lowin-group">
+							<label>密码</label>
+							<input id="pass" type="password" name="pass" autocomplete="current-password" class="lowin-input">
+						</div>
+						<button class="lowin-btn" onclick="register()">
+							注册
+						</button>
+
+						<div class="text-foot">
+							已经有账号了么? <a href="login.html" class="login-link">登录</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery/jquery-2.2.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		var InterValObj; //timer变量，控制时间
+		var count = 60; //间隔函数，1秒执行
+		var curCount;//当前剩余秒数
+	
+		function sendMessage() {
+			var pNum = $("#phoneNum").val();
+			$("#btnSendCode").css({"background-color":"var(--color-dark)","color":"white"});
+		  	curCount = count;
+		　　	//设置button效果，开始计时
+			$("#btnSendCode").attr("disabled", "true");
+			$("#btnSendCode").val(curCount + "秒");
+			InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+		　　  //向后台发送处理数据
+			$.ajax({
+	          //几个参数需要注意一下
+	            type: "POST",//方法类型
+	            dataType: "text",//预期服务器返回的数据类型
+	            url: "/user/sendCode" ,//url
+	            data: {"phoneNum":pNum},
+	            success: function (result) {
+	            	console.log(result);//打印服务端返回的数据(调试用)
+	            	if(result.result == 0){
+	            		
+	            		alert("成功发送验证码,请注意查收");
+	            	}else{
+	            		alert("错误代码："+result.result+" 错误信息："+result.errmsg);
+	            	}
+	            },
+	            error : function() {
+	                alert("异常！");
+	            }
+			});
+		}
+	
+		//timer处理函数
+		function SetRemainTime() {
+			if (curCount == 0) {                
+				window.clearInterval(InterValObj);//停止计时器
+				$("#btnSendCode").removeAttr("disabled");//启用按钮
+				$("#btnSendCode").val("重新获取");
+			}
+			else {
+				curCount--;
+				$("#btnSendCode").val(curCount+ "秒");
+			}
+		}
+		
+		//注册
+		function register(){
+			var data={
+				"userName" : $("#userName").val(),
+				"pass" : $("#pass").val(),
+				"phoneNum" : $("#phoneNum").val(),
+				"vcode" : $("#vcode").val()
+			}
+			console.log(data);
+			$.ajax({
+	            //几个参数需要注意一下
+	                type: "POST",//方法类型
+	                dataType: "text",//预期服务器返回的数据类型
+	                url: "/user/register" ,//url
+	                data: data,
+	                success: function (result) {
+	                	if(result == "恭喜您注册成功，可以登录啦"){
+	                   		alert(result);
+	                   		window.location.href='login.html';
+	                	}else{
+	                		alert("注册失败");
+	                	}
+	                },
+	                error : function(result) {
+	                    alert("异常！"+result);
+	                }
+	            });
+		}
+		</script>
+</body>
+</html>

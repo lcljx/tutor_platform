@@ -1,28 +1,24 @@
 package com.ljx.tutor_platform.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.commons.collections4.map.HashedMap;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Md5Hash;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Description;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ljx.tutor_platform.entity.User;
@@ -63,6 +59,7 @@ public class UserController{
 		    	user.setNickName(user.getUserName());
 		    	user.setSalt(random);
 		    	user.setStatus(1);//1表示可用账号，0表示注销账号
+		    	user.setRole("1");
 		    	userService.addUser(user);
 		    	result = "恭喜您注册成功，可以登录啦";
 		    }
@@ -77,41 +74,39 @@ public class UserController{
 	 * 发送验证码
 	 * */
     @RequestMapping(value="/sendCode")
-    public String sendCode(@RequestBody String phoneNum,HttpServletRequest request){
+    public String sendCode(String phoneNum,HttpServletRequest request){
     	String[] phoneNumbers = {phoneNum};
     	String rs = messageValidate.sendMsg(phoneNumbers,request);
     	return rs;
     }
     
     /**
-	 * 登录
+	 * 后台登录
 	 * */
-    @RequestMapping(value="/login")
-    public String login(String userName,String pass) {
-    	User user = new User();
-    	String flag = "";
-    	Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken(userName,pass);
-		try {
-			subject.login(token);
-			if(subject.isAuthenticated()){
-				user = userService.findUserByUsername(userName);
-				Session session = subject.getSession();
-				session.setAttribute("currentUser", user);
-			}
-			flag = "登录成功";
-		} catch (AuthenticationException e) {
-			// TODO Auto-generated catch block
-			String errorMsg = "账户或密码错误";
-			e.printStackTrace();
-			return errorMsg;
-		}
-    	return flag;
+    @RequestMapping(value="/login",method=RequestMethod.POST)
+    public String login(String account,String password) {
+    	Map<String, Object> m = new HashedMap<String, Object>();
+    	m = userService.login(account,password);
+    	System.out.println(m.get("flag"));
+    	return (String) m.get("flag");
     }
+    
+    /**
+   	 *前台 登录
+   	 * */
+	@RequestMapping(value="/frontLogin",method=RequestMethod.POST)
+	public String frontLogin(String account,String password) {
+		Map<String, Object> m = new HashedMap<String, Object>();
+		m = userService.frontLogin(account,password);
+		return (String) m.get("flag");
+	}
     
     @RequestMapping(value="/currentUser")
     public User currentUser(HttpServletRequest request) {
     	User currentUser = (User) request.getSession().getAttribute("currentUser");
+    	List<String> roles = userService.getRoleByUsername(currentUser.getUserName());
+    	String role = roles.get(0);
+    	currentUser.setRole(role);
 		return currentUser;
     }
     
@@ -141,13 +136,14 @@ public class UserController{
      * @throws IOException 
 	 * */
     @RequestMapping(value="/logout")
-    public void logout(HttpServletRequest request,HttpServletResponse response,String flag) throws IOException {
+    public void logout(HttpServletRequest request,HttpServletResponse response,@RequestParam String flag) throws IOException {
     	System.out.println(flag);
     	request.getSession().removeAttribute("currentUser");
     	if(flag.equals("front")) {
     		response.sendRedirect(request.getContextPath()+"/login.html");
     	}else {
-    		response.sendRedirect(request.getContextPath()+"/manage/manageLogin.html");
+    		response.sendRedirect(request.getContextPath()+"/manage/login.html");
     	}
     }
+ 
 }

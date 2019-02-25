@@ -27,5 +27,7 @@ public interface PublishAndFeedBackDao {
 	boolean delFeedbackByid(String id);
 
 	List<Contact> showContacts();
+
+	List<Publish> showPublish();
 	
 }

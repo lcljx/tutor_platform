@@ -66,5 +66,10 @@ public class PublishAndFeedBackServiceImpl implements PublishAndFeedBackService{
 		// TODO Auto-generated method stub
 		return pfDao.showContacts();
 	}
+	@Override
+	public List<Publish> showPublish() {
+		// TODO Auto-generated method stub
+		return pfDao.showPublish();
+	}
 
 }

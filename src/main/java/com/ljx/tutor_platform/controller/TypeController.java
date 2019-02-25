@@ -29,8 +29,7 @@ public class TypeController {
 	private TypeService typeService;
 	
 	@RequestMapping(value="/showCourseType")
-	public List<TutorType> showCourseType(){
-		String flag = "课程";
+	public List<TutorType> showCourseType(String flag){
 		List<TutorType> types = new ArrayList<TutorType>();
 		types = typeService.showCourseType(flag);
 		return types;

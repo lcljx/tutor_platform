@@ -40,7 +40,7 @@ public class CourseController {
 	@RequestMapping(value="showCourseByType")
 	public List<Course> showCourseByType(String courseType){
 		List<Course> courses = new ArrayList<Course>();
-		courses = courseService.getCourseByType(courseType);//获取最受欢迎的6门课程
+		courses = courseService.getCourseByType(courseType);
 		return courses;
 	}
 	
@@ -73,10 +73,10 @@ public class CourseController {
 		map.put("rank", course.getRank());
 		map.put("start", pageBean.getStart());
 		map.put("size", pageBean.getPageSize());
-		List<Course> typetList =courseService.findCourseList(map);
+		List<Course> coursetList =courseService.findCourseList(map);
 		Long total=courseService.getTotal(map);
 		Map<String,Object> m = new HashMap<>();
-		m.put("rows", typetList);
+		m.put("rows", coursetList);
 		m.put("total", total);
 		return m;
 	}

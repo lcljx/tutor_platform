@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css">
+		<script type="text/javascript" src="../../easyui/jquery.min.js"></script>
+		<script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="../../easyui/locale/easyui-lang-zh_CN.js"></script>
+		<script src="../../js/manage/main.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<table id="dg"  class="easyui-datagrid" style="width:100%;height:690px"
+				url="../../manageinfo/manageInfos"
+				toolbar="#toolbar"
+				rownumbers="true" fitColumns="true" singleSelect="true" pagination="true">
+			<thead>
+				<tr>
+					<th field="userName" width="33%">账号</th>
+					<th field="trueName" width="33%">姓名</th>
+					<th field="role" width="33%">角色名</th>
+				</tr>
+			</thead>
+		</table>
+		<div id="toolbar">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="editRole()">编辑</a>
+		</div>
+		
+		<div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding: 10px 20px"
+		   closed="true" buttons="#dlg-buttons">
+		   
+		   <form id="fm" method="post">
+			<table cellspacing="8px">
+				<tr>
+					<td>角色：</td>
+					<td><input id="role" name="role" class="easyui-combobox" width="50px"></td>
+				</tr>
+				
+			</table>
+		   </form>
+		 </div>
+		<div id="dlg-buttons">
+			
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveAccount()">保存</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+		</div>
+		<script>
+			
+			
+			function delAccount(){
+				var row = $('#dg').datagrid('getSelected');
+				if (row){
+					$.messager.confirm('Confirm','你确定要删除该条信息么?',function(r){
+						if (r){
+							$.post('../../manageinfo/delManager',{id:row.id},function(result){
+								if (result){
+									alert("成功删除");
+									$('#dg').datagrid('reload');	// reload the user data
+								} else {
+									$.messager.show({	// show error message
+										title: 'Error',
+										msg: result.errorMsg
+									});
+								}
+							},'json');
+							}
+					});
+				}
+			}		
+			
+			function doSearch(){
+				$('#dg').datagrid('load',{
+					userName : $('#username').val(),
+					trueName : $('#truename').val()
+				});
+			}
+			
+			$(function(){
+				 $.ajax({
+				        url:"../../manageinfo/showRoles",  
+				        dataType:"json", 
+				        type:"post",
+				        data:{
+				            "type":"audit_state"        
+				        },
+				        success:function(data){                                 
+				                    //绑定第一个下拉框
+				                    $('#role').combobox({
+				                            data: data,                        
+				                            valueField: 'id',
+				                            textField: 'description'}
+				                            );                       
+				       },
+				       error:function(error){
+				           alert("初始化下拉控件失败");
+				       }
+				    })
+			});
+			
+			//当编辑用户时，打开一个对话框并从 datagrid 选择的行中加载表单数据。
+			function editRole(){
+				var row = $('#dg').datagrid('getSelected');
+				console.log(row.role);
+				if (row){
+					$('#dlg').dialog('open').dialog('setTitle','编辑用户');
+					//$('#fm').form('load',row);
+					$('#role').val(row.role);
+					url = '../../manageinfo/updateRoles?id='+row.id;
+				}
+			}
+			
+			function saveAccount(){
+				$('#fm').form('submit',{
+					url: url,
+					onSubmit: function(){
+						return $(this).form('validate');
+					},
+					success: function(result){
+						
+						if (!result){
+							$.messager.show({
+								title: 'Error',
+								msg: "操作失败"
+							});
+						} else {
+							alert("操作成功");
+							$('#dlg').dialog('close');		// close the dialog
+							$('#dg').datagrid('reload');	// reload the user data
+						}
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

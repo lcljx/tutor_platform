@@ -29,6 +29,7 @@ public class MyRealm extends AuthorizingRealm{
     public void setName(String name) {
         super.setName("myRealm");
     }
+    //授权
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		// TODO Auto-generated method stub

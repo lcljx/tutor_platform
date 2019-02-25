@@ -27,9 +27,8 @@ import com.ljx.tutor_platform.entity.User;
 import com.ljx.tutor_platform.service.PublishAndFeedBackService;
 import com.ljx.tutor_platform.utils.ExcelUtils;
 import com.ljx.tutor_platform.utils.GsonUtils;
+import com.ljx.tutor_platform.utils.MyUtils;
 
-import cn.afterturn.easypoi.excel.ExcelExportUtil;
-import cn.afterturn.easypoi.excel.entity.ExportParams;
 
 @RestController
 @RequestMapping(value="/feedpub")//feedpub是feedback和publish的简写
@@ -44,8 +43,7 @@ public class PublishAndFeedBackController {
 	 * */
 	@RequestMapping(value="/savePublish")
 	public boolean savePublish(String publishname,String publishcontent,HttpServletRequest request) {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-    	String createTime = df.format(new Date());// new Date()为获取当前系统时间
+		String createTime = MyUtils.getCurrentDate();
     	User currentUser = (User) request.getSession().getAttribute("currentUser");
     	Publish publish = new Publish();
     	publish.setCreateTime(createTime);
@@ -152,9 +150,23 @@ public class PublishAndFeedBackController {
 		return flag;
 	}
 	
+	/**
+	 * 在主页显示反馈
+	 * @throws IOException 
+	 * */
 	@RequestMapping(value="/showContacts")
 	public List<Contact> showContacts() {
 		List<Contact> contacts = pfService.showContacts();
 		return contacts;
+	}
+	
+	/**
+	 * 在关于我们那儿显示发布的公告
+	 * @throws IOException 
+	 * */
+	@RequestMapping(value="/showPublish")
+	public List<Publish> showPublish() {
+		List<Publish> publishs = pfService.showPublish();
+		return publishs;
 	}
 }

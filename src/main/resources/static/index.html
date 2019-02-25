@@ -38,7 +38,7 @@
                                 <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
                             </div>
                             <div class="login-content">
-                                <a href="account.html">注册</a>
+                                <a href="register.html">注册</a>
 								<a href="login.html">登录</a>
                             </div>
                         </div>
@@ -467,7 +467,6 @@
 			dataType : 'json',
 			data : "currentUser",
 			success : function(data){
-				console.log(data);
 				var len = data.length;
 				for(var i=0;i<len;i++){
 					$("#popularCourse").append(""

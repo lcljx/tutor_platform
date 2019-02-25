@@ -2,17 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- task的mapper -->
-<mapper namespace="com.ljx.tutor_platform.dao.CourseDao">
-    <resultMap id="coursemap" type="com.ljx.tutor_platform.entity.Course">
+<mapper namespace="com.ljx.tutor_platform.dao.TaskDao">
+    <resultMap id="taskmap" type="com.ljx.tutor_platform.entity.Task">
     	<result property="id" column="id"/>
-        <result property="courseName" column="course_name"/>
+        <result property="taskName" column="task_name"/>
         <result property="createTime" column="create_time"/>
-        <result property="courseDescribe" column="course_describe"/>
+        <result property="taskDescribe" column="task_describe"/>
         <result property="price" column="price"/>
         <result property="status" column="status"/>
         <result property="period" column="period"/>
-        <result property="commission" column="commission"/>
-        <result property="rank" column="rank"/>
+        <result property="ranks" column="ranks"/>
         <result property="pic" column="pic"/>
         
         <association property="user"  javaType="com.ljx.tutor_platform.entity.User">
@@ -20,7 +19,7 @@
                <id column="teacher_id" property="id"/>
                <result property="userName" column="username"/>
 		       <result property="nickName" column="nick_name"/>
-		       <result property="phoneNum" column="uphone"/>
+		       <result property="phoneNum" column="phone"/>
 		       <result property="email" column="email"/>
 		       <result property="trueName" column="true_name"/>
 		       <result property="address" column="address"/>
@@ -32,28 +31,22 @@
                <result property="typeName" column="type_name"/>
         </association>
     </resultMap>
-    <select id="getTopSixCourse" resultMap="coursemap">
-        select * from course c left join user u on c.teacher_id=u.id where c.rank>=4 limit 0,9
-    </select>
     
-    <select id="getCourseByType" resultMap="coursemap">
-        select * from course c left join user u on c.teacher_id=u.id where c.type_id=(
-			select id from tutor_type where type_name=#{courseType}
+    <select id="getTaskByType" resultMap="taskmap">
+        select * from task c left join user u on c.teacher_id=u.id where c.type_id=(
+			select id from tutor_type where type_name=#{taskType}
 		);
     </select>
     
-    
-    
-     <resultMap id="newcoursemap" type="com.ljx.tutor_platform.entity.Course">
+     <resultMap id="newtaskmap" type="com.ljx.tutor_platform.entity.Task">
     	<result property="id" column="c_id"/>
-        <result property="courseName" column="course_name"/>
+        <result property="taskName" column="task_name"/>
         <result property="createTime" column="ccreate_time"/>
-        <result property="courseDescribe" column="course_describe"/>
+        <result property="taskDescribe" column="task_describe"/>
         <result property="price" column="price"/>
         <result property="status" column="status"/>
         <result property="period" column="period"/>
-        <result property="commission" column="commission"/>
-        <result property="rank" column="ranks"/>
+        <result property="ranks" column="ranks"/>
         <result property="pic" column="cpic"/>
         
         <association property="user"  javaType="com.ljx.tutor_platform.entity.User">
@@ -77,27 +70,27 @@
     
     
     
-    <select id="findCourseList" parameterType="map" resultMap="newcoursemap">
+    <select id="findTaskList" parameterType="map" resultMap="newtaskmap">
 		select 
-			c_id,course_name,price,course_describe,
-			period,status,commission,ranks,
+			c_id,task_name,price,task_describe,
+			period,status,ranks,
 			ccreate_time,cpic,true_name,uphone,
 			ty.type_name from 
 			(
-				select c.id as c_id,type_id,course_name,
-				price,course_describe,period,
-				c.status as status,commission,c.rank as ranks,
+				select c.id as c_id,type_id,task_name,
+				price,task_describe,period,
+				c.status as status,c.ranks as ranks,
 				c.create_time as ccreate_time,c.pic as cpic,
 		        u.true_name as true_name,u.phone as uphone
-				from course c left join user u on c.teacher_id=u.id
+				from task c left join user u on c.teacher_id=u.id
 			) as T left join tutor_type ty on T.type_id = ty.id
 		<where>
-			<if test="courseName!=null and courseName!='' ">
-				and course_name like '%${courseName}%'
+			<if test="taskName!=null and taskName!='' ">
+				and task_name like '%${taskName}%'
 			</if>
 			
-			<if test="rank!=null and rank!='' ">
-				and ranks=#{rank}
+			<if test="ranks!=null and ranks!='' ">
+				and ranks=#{ranks}
 			</if>
 		</where>
 		<if test="start!=null and size!=null">
@@ -106,36 +99,33 @@
 	</select>
 	<!-- 获取条数 -->
 	<select id="getTotal" parameterType="Map" resultType="Long">
-		select count(*) from course
+		select count(*) from task
 		<where>
-			<if test="courseName!=null and courseName!='' ">
-				and course_name like '%${courseName}%'
+			<if test="taskName!=null and taskName!='' ">
+				and task_name like '%${taskName}%'
 			</if>
 			
-			<if test="rank!=null and rank!='' ">
-				and course.rank=#{rank}
+			<if test="ranks!=null and tutorType!='' ">
+				and task.ranks=#{ranks}
 			</if>
 		</where>
 	</select>
 	
-	<delete id="delCourse" parameterType="Integer">
-   		delete from course where id=#{id}
+	<delete id="delTask" parameterType="Integer">
+   		delete from task where id=#{id}
    	</delete>
    	
-   	<update id="editCourse" parameterType="com.ljx.tutor_platform.entity.Course">
-	 	  update course
+   	<update id="editTask" parameterType="com.ljx.tutor_platform.entity.Task">
+	 	  update task
 	 	  <set>
-			<if test="courseName!=null and courseName!='' ">
-				course_name=#{courseName},
-			</if>
-			<if test="commission!=null and commission!='' ">
-				commission=#{commission},
+			<if test="taskName!=null and taskName!='' ">
+				task_name=#{taskName},
 			</if>
 			<if test="status!=null and status!='' ">
 				status=#{status},
 			</if>
-			<if test="rank!=null and rank!='' ">
-				course.rank=#{rank},
+			<if test="ranks!=null and ranks!='' ">
+				task.ranks=#{ranks},
 			</if>
 	 	  </set>
 	 	  where  id=#{id}

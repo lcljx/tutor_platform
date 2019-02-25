@@ -73,7 +73,7 @@
                                     <li><a href="index.html">首页</a></li>
                                     <li><a href="course.html">课程</a></li>
                                     <li><a href="#">任务</a></li>
-                                    <li><a href="teacher.html">名师</a></li>
+                                    <li><a href="#">名师</a></li>
                                     <li><a href="about-us.html">关于我们</a></li>
                                     <li><a href="contact.html">联系我们</a></li>
                                 </ul>
@@ -97,7 +97,7 @@
     <!-- ##### Breadcumb Area Start ##### -->
     <div class="breadcumb-area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
         <div class="bradcumbContent">
-            <h2>我们的教师</h2>
+            <h2>我们的任务</h2>
         </div>
     </div>
     <!-- ##### Breadcumb Area End ##### -->
@@ -109,13 +109,12 @@
                 <div class="col-12">
                     <div class="section-heading text-center mx-auto wow fadeInUp" data-wow-delay="300ms">
                         <span>最好的</span>
-                        <h3>教师</h3>
+                        <h3>任务分类</h3>
                     </div>
                 </div>
             </div>
-            <div class="row" id="shows">
-				<!-- 这是教师页面 -->
-            </div>
+            <div class="row" id="cousetype">
+            	<!-- 这里是主要的任务类别 -->
             </div>
         </div>
     </div>
@@ -125,21 +124,17 @@
     <div class="popular-course-details-area wow fadeInUp" data-wow-delay="300ms">
         <div class="single-top-popular-course d-flex align-items-center flex-wrap">
             <div class="popular-course-content">
-                <h5>励学篇</h5>
-                <span>By 赵恒   | 北宋 宋.真宗</span>
+                <h5>Business for begginers</h5>
+                <span>By Simon Smith   |  March 18, 2018</span>
                 <div class="course-ratings">
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
                 </div>
-                <p>富家不用买良田，书中自有千钟粟。</p>
-				<p>安居不用架高楼，书中自有黄金屋。</p>
-				<p>娶妻莫恨无良媒，书中自有颜如玉。</p>
-				<p>出门莫恨无人随，书中车马多如簇。</p>
-				<p>男儿欲遂平生志，五经勤向窗前读。 </p>
-                
+                <p>Cras vitae turpis lacinia, lacinia lacus non, fermentum nisi. Donec et sollicitudin est, in euismod. Morbi vel arcu gravida, iaculis lacus vel, posuere ipsum. Sed faucibus mauris vitae urna consectetur, sit amet maximus nisl sagittis. Ut in iaculis enim, et pulvinar mauris. Etiam tristique magna eget velit consectetur, a tincidunt velit dictum. Cras vulputate metus id felis ornare hendrerit. Maecenas sodales suscipit ipsum.</p>
+                <a href="#" class="btn academy-btn btn-sm mt-15">See More</a>
             </div>
             <div class="popular-course-thumb bg-img" style="background-image: url(img/bg-img/bg-4.jpg);"></div>
         </div>
@@ -308,37 +303,36 @@
     <script src="js/active.js"></script>
     <script src="js/public.js"></script>
     <script>
-    //这个是教师页面
-    $.ajax({
-		url : '../teacher/showTeachers',
-		type : 'POST',
-		dataType : 'json',
-		data : {"teacher":"teacher"},
-		success : function(data){
-			console.log(data);
-			var len = data.length;
-			for(var i=0;i<len;i++){
-				$("#shows").append(""
-						+"<div class='col-12 col-sm-6 col-lg-3'>"
-				        +    "<div class='single-teachers-area text-center mb-100 wow fadeInUp' data-wow-delay='400ms'>"
-				        +        "<!-- Thumbnail -->"
-				        +       "<div class='teachers-thumbnail'>"
-				        +            "<img src='"+data[i].upic+"' alt=''>"
-				        +       "</div>"
-				        +        "<!-- Meta Info -->"
-				        +        "<div class='teachers-info mt-30'>"
-				        +            "<h5>"+data[i].trueName+"</h5>"
-				        +            "<span>Marketing Proffesor</span>"
-				        +        "</div>"
-				        +    "</div>"
-				        +"</div>"		
-				)
+	  //显示主要的课程类型
+	    $.ajax({
+			url : '../type/showCourseType',
+			type : 'POST',
+			dataType : 'json',
+			data : {"flag" : "任务"},
+			success : function(data){
+				console.log(data);
+				var len = data.length;
+				for(var i=0;i<len;i++){
+					 $("#cousetype").append(""
+				                +"<div class='col-12 col-lg-6'>"
+				                +    "<div class='single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp' data-wow-delay='400ms'>"
+				                +        "<div class='popular-course-content'>"
+				                +            "<h5>"+data[i].typeName+"</h5>"
+				                +            "<span></span>"
+				                +            "<p>"+data[i].describe+"</p>"
+				                +            "<a href='"+data[i].url+"' class='btn academy-btn btn-sm'>查看详情</a>"
+				                +        "</div>"
+				                +        "<div class='popular-course-thumb bg-img' style='background-image: url("+data[i].pic+");'></div>"
+				                +    "</div>"
+				                +"</div>"
+						);
+				}
+			},
+			error : function(){
+				alert("出了一些问题");
 			}
-		},
-		error : function(){
-			alert("尚未登录");
-		}
-	});
+			
+		});
     </script>
 </body>
 
