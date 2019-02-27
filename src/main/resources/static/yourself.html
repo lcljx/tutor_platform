@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>大学生家教平台</title>
+    <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+        <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/auth.css">
+	<style>
+		.code{
+			background-color: #D0EF84;
+			color: var(--color-dark);
+			border: none;
+			border-radius: 3px;
+			padding: 15px 20px;
+			width: 32%;
+			outline: 0;
+			cursor:pointer;
+			font-weight: 600;
+		}
+	</style>
+</head>
+<body class="sidebar-fixed header-fixed">
+<!-- ##### Preloader ##### -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="header-content h-100 d-flex align-items-center justify-content-between">
+                            <div class="academy-logo">
+                                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                            </div>
+                            <div class="login-content">
+                                <a href="register.html">注册</a>
+                                <a href="login.html">登录</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="academy-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="academyNav">
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="index.html">首页</a></li>
+                                    <li><a href="course.html">课程</a></li>
+                                    <li><a href="#">任务</a></li>
+                                    <li><a href="#">名师</a></li>
+                                    <li><a href="about-us.html">关于我们</a></li>
+                                    <li><a href="contact.html">联系我们</a></li>
+                                </ul>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+
+                        <!-- Calling Info -->
+                        <div class="calling-info">
+                            <div class="call-center">
+                                <a href="tel:+654563325568889"><i class="icon-telephone-2"></i> <span>(+86) 12580</span></a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->	
+    <!-- ##### Breadcumb Area Start ##### -->
+    <div class="breadcumb-area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
+        <div class="bradcumbContent">
+            <h2>要修改密码么？</h2>
+        </div>
+    </div>
+    <!-- ##### Breadcumb Area End ##### -->
+	<div class="lowin lowin-red">
+		<div class="lowin-brand">
+			<img src="img/kodinger.jpg" alt="logo">
+		</div>
+		<div class="lowin-wrapper">
+			<div class="lowin-box lowin-register">
+				<div class="lowin-box-inner">
+					<div id="register">
+						<p>欢迎使用</p>
+						<div class="lowin-group">
+							<label>手机号</label>
+							<input id="phoneNum" type="text" autocomplete="text" name="phone" class="lowin-input">
+						</div>
+						
+						<div class="lowin-group">
+							<label>验证码</label>
+							<input id="vcode" type="text" autocomplete="text" name="vcode" class="lowin-input"  style="width: 66%;"/>
+							<input id="btnSendCode" type="button" autocomplete="text" name="code" class="code" value="获取验证码" onclick="sendMessage()">
+						</div>
+						
+						<div class="lowin-group">
+							<label>密码</label>
+							<input id="pass" type="password" name="pass" autocomplete="current-password" class="lowin-input">
+						</div>
+						<button class="lowin-btn" onclick="register()">
+							修改密码
+						</button>
+
+						<div class="text-foot">
+							祝您使用愉快
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<!-- footer -->
+		<footer class="footer-area" style="margin-top:600px">
+        <div class="main-footer-area section-padding-100-0">
+            <div class="container">
+                <div class="row">
+                    <!-- Footer Widget Area -->
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="footer-widget mb-100">
+                            <div class="widget-title">
+                                <a href="#"><img src="img/core-img/logo2.png" alt=""></a>
+                            </div>
+                            <p>青春，也许是一场场考试，是宽大的校服，是阳光下的操场；青春，更是成长担当，一心追梦，哪怕万人阻挡，也不愿投降的勇气和力量。青春是一种心境，让我们无惧世事变幻，放开手脚，勇敢去闯。</p>
+                            <div class="footer-social-info">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-dribbble"></i></a>
+                                <a href="#"><i class="fa fa-behance"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Footer Widget Area -->
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="footer-widget mb-100">
+                            <div class="widget-title">
+                                <h6>一些链接</h6>
+                            </div>
+                            <nav>
+                                <ul class="useful-links">
+                                    <li><a href="index.html">主页</a></li>
+                                    <li><a href="https://www.baidu.com">百度</a></li>
+                                    <li><a href="https://www.github.com">github</a></li>
+                                    <li><a href="https://www.csdn.net/">CSDN</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- Footer Widget Area -->
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="footer-widget mb-100">
+                            <div class="widget-title">
+                                <h6>画廊</h6>
+                            </div>
+                            <div class="gallery-list d-flex justify-content-between flex-wrap">
+                                <a href="img/bg-img/gallery1.jpg" class="gallery-img" title="Gallery Image 1"><img src="img/bg-img/gallery1.jpg" alt=""></a>
+                                <a href="img/bg-img/gallery2.jpg" class="gallery-img" title="Gallery Image 2"><img src="img/bg-img/gallery2.jpg" alt=""></a>
+                                <a href="img/bg-img/gallery3.jpg" class="gallery-img" title="Gallery Image 3"><img src="img/bg-img/gallery3.jpg" alt=""></a>
+                                <a href="img/bg-img/gallery4.jpg" class="gallery-img" title="Gallery Image 4"><img src="img/bg-img/gallery4.jpg" alt=""></a>
+                                <a href="img/bg-img/gallery5.jpg" class="gallery-img" title="Gallery Image 5"><img src="img/bg-img/gallery5.jpg" alt=""></a>
+                                <a href="img/bg-img/gallery6.jpg" class="gallery-img" title="Gallery Image 6"><img src="img/bg-img/gallery6.jpg" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Footer Widget Area -->
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="footer-widget mb-100">
+                            <div class="widget-title">
+                                <h6>联系信息</h6>
+                            </div>
+                            <div class="single-contact d-flex mb-30">
+                                <i class="icon-placeholder"></i>
+                                <p>福建省福州市福建师范大学</p>
+                            </div>
+                            <div class="single-contact d-flex mb-30">
+                                <i class="icon-telephone-1"></i>
+                                <p>电话: 12580 <br>官方电话: 400-800-8820</p>
+                            </div>
+                            <div class="single-contact d-flex">
+                                <i class="icon-contract"></i>
+                                <p>1055941306@qq.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-footer-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <p>
+							Copyright &copy;<script>document.write(new Date().getFullYear());</script> Colorlib  All rights reserved | Tutor platform <a href="http://www.cssmoban.com/" target="_blank" title="大学生家教平台">大学生家教平台</a>
+						</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+		
+		
+	<!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+    <!-- Google Maps -->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"></script>
+    <script src="js/google-map/map-active.js"></script>-->
+    <script src="js/public.js"></script>
+	<script type="text/javascript">
+	var InterValObj; //timer变量，控制时间
+	var count = 60; //间隔函数，1秒执行
+	var curCount;//当前剩余秒数
+
+	function sendMessage() {
+		var pNum = $("#phoneNum").val();
+		$("#btnSendCode").css({"background-color":"var(--color-dark)","color":"white"});
+	  	curCount = count;
+	　　	//设置button效果，开始计时
+		$("#btnSendCode").attr("disabled", "true");
+		$("#btnSendCode").val(curCount + "秒");
+		InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+	　　  //向后台发送处理数据
+		$.ajax({
+          //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "text",//预期服务器返回的数据类型
+            url: "/user/sendCode" ,//url
+            data: {"phoneNum":pNum},
+            success: function (result) {
+            	console.log(result);//打印服务端返回的数据(调试用)
+            	alert("成功发送验证码,请注意查收");
+            },
+            error : function() {
+                alert("异常！");
+            }
+		});
+	}
+
+	//timer处理函数
+	function SetRemainTime() {
+		if (curCount == 0) {                
+			window.clearInterval(InterValObj);//停止计时器
+			$("#btnSendCode").removeAttr("disabled");//启用按钮
+			$("#btnSendCode").val("重新获取");
+		}
+		else {
+			curCount--;
+			$("#btnSendCode").val(curCount+ "秒");
+		}
+	}
+	
+	//注册
+	function register(){
+		var data={
+			"userName" : currentUser.userName,
+			"pass" : $("#pass").val(),
+			"phoneNum" : $("#phoneNum").val(),
+			"vcode" : $("#vcode").val(),
+			"email" : "没啥用处，就是用来做判断。不会输入数据库的"
+		}
+		console.log(data);
+		$.ajax({
+            //几个参数需要注意一下
+                type: "POST",//方法类型
+                dataType: "text",//预期服务器返回的数据类型
+                url: "/user/register" ,//url
+                data: data,
+                success: function (result) {
+                	if(result == "密码修改成功，请前往登录"){
+                   		alert(result);
+                   		window.location.href='login.html';
+                	}else{
+                		alert("修改失败");
+                	}
+                },
+                error : function() {
+                    alert("修改失败，您是不是验证码错误呢？");
+                }
+            });
+	}
+	</script>
+
+</body>
+</html>

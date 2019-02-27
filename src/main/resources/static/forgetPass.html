@@ -29,7 +29,7 @@
 			<div class="lowin-box lowin-register">
 				<div class="lowin-box-inner">
 					<div id="register">
-						<p>创建账户</p>
+						<p>找回你的密码</p>
 						<div class="lowin-group">
 							<label>账号</label>
 							<input id="userName" type="text" name="userName" autocomplete="account" class="lowin-input">
@@ -54,7 +54,7 @@
 						</button>
 
 						<div class="text-foot">
-							已经有账号了么? <a href="login.html" class="login-link">登录</a>
+							祝您使用愉快！
 						</div>
 					</div>
 				</div>
@@ -111,7 +111,8 @@
 				"userName" : $("#userName").val(),
 				"pass" : $("#pass").val(),
 				"phoneNum" : $("#phoneNum").val(),
-				"vcode" : $("#vcode").val()
+				"vcode" : $("#vcode").val(),
+				"email" : "forget"//用来做忘记密码的标志
 			}
 			console.log(data);
 			$.ajax({

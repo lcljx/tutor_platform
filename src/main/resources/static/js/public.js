@@ -1,3 +1,4 @@
+var currentUser;
 //這個是登錄后的操作
 $.ajax({
 	url : '../user/currentUser',
@@ -5,6 +6,8 @@ $.ajax({
 	dataType : 'json',
 	data : "currentUser",
 	success : function(result){
+		currentUser=result;
+		console.log(currentUser);
 		$(".login-content").children().eq(0).text("个人中心");
 		$(".login-content").children().eq(0).attr("href","https://www.baidu.com");
 		$(".login-content").children().eq(1).text("注销");

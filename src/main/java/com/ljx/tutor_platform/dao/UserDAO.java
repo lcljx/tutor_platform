@@ -47,4 +47,6 @@ public interface UserDAO {
 
 	boolean updateRoles(String id, String role);
 
+	void updatePass(User user);
+
 }

@@ -3,11 +3,13 @@ package com.ljx.tutor_platform.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.ljx.tutor_platform.entity.User;
 
 public interface UserService {
 	
-	public void addUser(User user);
+	public String editUser(User user,HttpServletRequest request);
 
 	public String findSaltByUsername(String username);
 
