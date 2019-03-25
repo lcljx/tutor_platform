@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- task的mapper -->
+<mapper namespace="com.ljx.tutor_platform.dao.FavoriteDao">
+	<resultMap id="favoriteMap" type="com.ljx.tutor_platform.entity.Favorite">
+		<result property="favoriteId" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="courseName" column="course_name"/>
+        <result property="contact" column="contact"/>
+        <result property="mobilePhone" column="mobile_phone"/>
+        <result property="coursePrice" column="course_price"/>
+        <result property="picture" column="picture"/>
+    </resultMap>
+    
+    <!-- 添加收藏 -->
+    <insert id="addFavorite" parameterType="com.ljx.tutor_platform.entity.Favorite" keyProperty="id" useGeneratedKeys="true">
+    	insert into favorite (user_id,course_name,contact,mobile_phone,course_price,picture)
+    	 values(#{userId},#{courseName},#{contact},#{mobilePhone},#{coursePrice},#{picture})
+    </insert>
+    
+    <!-- 显示收藏 -->
+    <select id="showFavorite" parameterType="java.lang.Integer" resultMap="favoriteMap">
+        select * from tutor_platform.favorite where user_id=#{id}
+    </select>
+    
+    <!-- 删除收藏 -->
+    <delete id="deleteFavorite" parameterType="java.lang.Integer">
+   		delete from favorite where id=#{favoriteId}
+   	</delete>  
+</mapper>

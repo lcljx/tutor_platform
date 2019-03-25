@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>大学生家教平台</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/createCourse.css">
+        <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/auth.css">
+	<style>
+		.code{
+			background-color: #D0EF84;
+			color: var(--color-dark);
+			border: none;
+			border-radius: 3px;
+			padding: 15px 20px;
+			width: 32%;
+			outline: 0;
+			cursor:pointer;
+			font-weight: 600;
+		}
+	</style>
+</head>
+<body class="sidebar-fixed header-fixed">
+<!-- ##### Preloader ##### -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="header-content h-100 d-flex align-items-center justify-content-between">
+                            <div class="academy-logo">
+                                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                            </div>
+                            <div class="login-content">
+                                <a href="register.html">注册</a>
+                                <a href="login.html">登录</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="academy-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="academyNav">
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="index.html">首页</a></li>
+                                    <li><a href="course.html">课程</a></li>
+                                    <li><a href="#">任务</a></li>
+                                    <li><a href="#">名师</a></li>
+                                    <li><a href="about-us.html">关于我们</a></li>
+                                    <li><a href="contact.html">联系我们</a></li>
+                                </ul>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+
+                        <!-- Calling Info -->
+                        <div class="calling-info">
+                            <div class="call-center">
+                                <a href="tel:+654563325568889"><i class="icon-telephone-2"></i> <span>(+86) 12580</span></a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->	
+    <!-- ##### Breadcumb Area Start ##### -->
+    <div class="breadcumb-area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
+        <div class="bradcumbContent">
+            <h2>发布课程</h2>
+        </div>
+    </div>
+    <!-- ##### Breadcumb Area End ##### -->
+	<div class="container" style="margin-top:200px;height:400px>
+		<form id="createCourse2" class="form-horizontal" enctype="multipart/form-data">
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-1 control-label">课程类型</label>
+		    <div class="col-sm-6" style="display:inline-block">
+		      
+		      <select id="courseType" name="type_id" class="form-control">
+		      	  <option class="courseType" value="0">请选择</option>
+		      </select>
+		      
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-1 control-label">课程名称</label>
+		    <div class="col-sm-6" style="display:inline-block">
+		      <input type="text" class="form-control" id="courseName" name="courseName" placeholder="">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-1 control-label">课程内容</label>
+		    <div class="col-sm-6" style="display:inline-block">
+		      <input type="text" class="form-control" name="courseDescribe" id="courseContent" placeholder="">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-1 control-label">价格</label>
+		    <div class="col-sm-6" style="display:inline-block">
+		      <input type="text" class="form-control" id="coursePrice" name="price" placeholder="">
+		    </div>
+		  </div>
+	 	  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-1 control-label">课时</label>
+		    <div class="col-sm-6" style="display:inline-block">
+		      <input type="text" class="form-control" id="period" name="period" placeholder="">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-1 control-label">状态</label>
+		    <div class="col-sm-6" style="display:inline-block">
+		      <select id="status" name="status" class="form-control">
+		      	  <option class="courseType" value ="1">在售</option>
+		      </select>
+		      
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-1 control-label">上传图片</label>
+		    <div class="col-sm-6" style="display:inline-block">
+		     <input type="file" id="uploadImg" name="file" style="width:100%;height:30px" placeholder="">
+		      
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <div class="col-sm-offset-3 col-sm-8">
+		      <button type="button" id="create6" class="btn btn-default" onclick="createCourse()">发 布</button>
+		    </div>
+		  </div>
+		</form>
+	</div>
+	<!-- footer -->
+	<footer class="footer-area" style="margin-top:600px">
+       <div class="main-footer-area section-padding-100-0">
+           <div class="container">
+               <div class="row">
+                   <!-- Footer Widget Area -->
+                   <div class="col-12 col-sm-6 col-lg-3">
+                       <div class="footer-widget mb-100">
+                           <div class="widget-title">
+                               <a href="#"><img src="img/core-img/logo2.png" alt=""></a>
+                           </div>
+                           <p>青春，也许是一场场考试，是宽大的校服，是阳光下的操场；青春，更是成长担当，一心追梦，哪怕万人阻挡，也不愿投降的勇气和力量。青春是一种心境，让我们无惧世事变幻，放开手脚，勇敢去闯。</p>
+                           <div class="footer-social-info">
+                               <a href="#"><i class="fa fa-facebook"></i></a>
+                               <a href="#"><i class="fa fa-twitter"></i></a>
+                               <a href="#"><i class="fa fa-dribbble"></i></a>
+                               <a href="#"><i class="fa fa-behance"></i></a>
+                               <a href="#"><i class="fa fa-instagram"></i></a>
+                           </div>
+                       </div>
+                   </div>
+                   <!-- Footer Widget Area -->
+                   <div class="col-12 col-sm-6 col-lg-3">
+                       <div class="footer-widget mb-100">
+                           <div class="widget-title">
+                               <h6>一些链接</h6>
+                           </div>
+                           <nav>
+                               <ul class="useful-links">
+                                   <li><a href="index.html">主页</a></li>
+                                   <li><a href="https://www.baidu.com">百度</a></li>
+                                   <li><a href="https://www.github.com">github</a></li>
+                                   <li><a href="https://www.csdn.net/">CSDN</a></li>
+                               </ul>
+                           </nav>
+                       </div>
+                   </div>
+                   <!-- Footer Widget Area -->
+                   <div class="col-12 col-sm-6 col-lg-3">
+                       <div class="footer-widget mb-100">
+                           <div class="widget-title">
+                               <h6>画廊</h6>
+                           </div>
+                           <div class="gallery-list d-flex justify-content-between flex-wrap">
+                               <a href="img/bg-img/gallery1.jpg" class="gallery-img" title="Gallery Image 1"><img src="img/bg-img/gallery1.jpg" alt=""></a>
+                               <a href="img/bg-img/gallery2.jpg" class="gallery-img" title="Gallery Image 2"><img src="img/bg-img/gallery2.jpg" alt=""></a>
+                               <a href="img/bg-img/gallery3.jpg" class="gallery-img" title="Gallery Image 3"><img src="img/bg-img/gallery3.jpg" alt=""></a>
+                               <a href="img/bg-img/gallery4.jpg" class="gallery-img" title="Gallery Image 4"><img src="img/bg-img/gallery4.jpg" alt=""></a>
+                               <a href="img/bg-img/gallery5.jpg" class="gallery-img" title="Gallery Image 5"><img src="img/bg-img/gallery5.jpg" alt=""></a>
+                               <a href="img/bg-img/gallery6.jpg" class="gallery-img" title="Gallery Image 6"><img src="img/bg-img/gallery6.jpg" alt=""></a>
+                           </div>
+                       </div>
+                   </div>
+                   <!-- Footer Widget Area -->
+                   <div class="col-12 col-sm-6 col-lg-3">
+                       <div class="footer-widget mb-100">
+                           <div class="widget-title">
+                               <h6>联系信息</h6>
+                           </div>
+                           <div class="single-contact d-flex mb-30">
+                               <i class="icon-placeholder"></i>
+                               <p>福建省福州市福建师范大学</p>
+                           </div>
+                           <div class="single-contact d-flex mb-30">
+                               <i class="icon-telephone-1"></i>
+                               <p>电话: 12580 <br>官方电话: 400-800-8820</p>
+                           </div>
+                           <div class="single-contact d-flex">
+                               <i class="icon-contract"></i>
+                               <p>1055941306@qq.com</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+       <div class="bottom-footer-area">
+           <div class="container">
+               <div class="row">
+                   <div class="col-12">
+                       <p>
+						Copyright &copy;<script>document.write(new Date().getFullYear());</script> Colorlib  All rights reserved | Tutor platform <a href="http://www.cssmoban.com/" target="_blank" title="大学生家教平台">大学生家教平台</a>
+					</p>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </footer>
+		
+		
+	<!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+    <!-- Google Maps -->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"></script>
+    <script src="js/google-map/map-active.js"></script>-->
+    <script src="js/public.js"></script>
+    <script src="js/createCourse.js"></script>
+	<script type="text/javascript">
+		getCourseTypes();
+	</script>
+
+</body>
+</html>
