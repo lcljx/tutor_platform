@@ -26,4 +26,6 @@ public interface UserService {
 	public Map<String, Object> frontLogin(String userName, String pass);
 
 	public List<String> getRoleByUsername(String userName);
+
+	public boolean updateUser(User user);
 }

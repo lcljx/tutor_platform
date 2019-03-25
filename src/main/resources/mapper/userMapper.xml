@@ -192,4 +192,25 @@
 	 	  </set>
 	 	  where  id=#{id}
 	</update>
+	
+	
+	<!-- 修改个人信息 -->
+	<update id="updateUser">
+	 	  update tutor_platform.user
+	 	  <set>
+	 	  	<if test="sex!=null and sex!=''">
+				sex=#{sex},
+			</if>
+			<if test="phoneNum!=null and phoneNum!=''">
+				phone=#{phoneNum},
+			</if>	
+			<if test="age!=null and age!=''">
+				age=#{age},
+			</if>	
+			<if test="trueName!=null and trueName!=''">
+				true_name=#{trueName}
+			</if>		
+	 	  </set>
+	 	  where  id=#{id}
+	</update>
 </mapper>

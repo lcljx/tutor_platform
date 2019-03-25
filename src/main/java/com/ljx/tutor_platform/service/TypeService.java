@@ -19,4 +19,6 @@ public interface TypeService {
 
 	boolean editType(TutorType tutorType);
 
+	List<TutorType> getCourseTypes(String flag);
+
 }

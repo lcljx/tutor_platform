@@ -52,4 +52,10 @@ public class TypeServiceImpl implements TypeService{
 		return typeDao.editType(tutorType);
 	}
 
+	@Override
+	public List<TutorType> getCourseTypes(String flag) {
+		// TODO Auto-generated method stub
+		return typeDao.showCourseType(flag);
+	}
+
 }

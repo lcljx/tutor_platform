@@ -3,6 +3,8 @@ package com.ljx.tutor_platform.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.ljx.tutor_platform.entity.Course;
 
 public interface CourseService {
@@ -18,5 +20,11 @@ public interface CourseService {
 	boolean editCourse(Course course);
 
 	boolean delCourse(Integer id);
+
+	boolean createCourse(Course course, HttpServletRequest request);
+
+	List<Course> getMyCourse(HttpServletRequest request);
+
+	boolean deleteMyCourse(Integer id);
 
 }

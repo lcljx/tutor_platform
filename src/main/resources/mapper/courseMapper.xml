@@ -20,7 +20,7 @@
                <id column="teacher_id" property="id"/>
                <result property="userName" column="username"/>
 		       <result property="nickName" column="nick_name"/>
-		       <result property="phoneNum" column="uphone"/>
+		       <result property="phoneNum" column="phone"/>
 		       <result property="email" column="email"/>
 		       <result property="trueName" column="true_name"/>
 		       <result property="address" column="address"/>
@@ -140,4 +140,17 @@
 	 	  </set>
 	 	  where  id=#{id}
 	</update>
+	
+	<!-- 前台课程的相关处理 -->
+    
+    <insert id="createCourse" parameterType="com.ljx.tutor_platform.entity.Publish" keyProperty="id" useGeneratedKeys="true">
+    	insert into course (type_id,teacher_id,status,course_name,course_describe,create_time,price,period,pic)
+    	 values(#{typeId},#{userId},#{status},#{courseName},#{courseDescribe},#{createTime},#{price},#{period},#{pic})
+    </insert>
+    
+    
+      <select id="getMyCourse" resultMap="coursemap">
+        select * from course where teacher_id=#{currentId}
+    </select>
+	
 </mapper>

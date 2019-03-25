@@ -49,4 +49,6 @@ public interface UserDAO {
 
 	void updatePass(User user);
 
+	boolean updateUser(User user);
+
 }

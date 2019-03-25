@@ -101,4 +101,11 @@ public class TypeController {
     	boolean flag = typeService.editType(tutorType);
 		return flag;
 	}
+	
+	//发布课程页面传递类别列表
+	@RequestMapping(value="/getCourseTypes")
+	public List<TutorType> getCourseTypes(String flag){
+		List<TutorType> courseTypes = typeService.getCourseTypes(flag);
+		return courseTypes;
+	}
 }

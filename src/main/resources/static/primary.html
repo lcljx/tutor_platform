@@ -38,8 +38,8 @@
                                 <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
                             </div>
                             <div class="login-content">
-                                <a href="#">注册</a>
-                                <a href="#">登录</a>
+                                <a href="register.html">注册</a>
+                                <a href="login.html">登录</a>
                             </div>
                         </div>
                     </div>
@@ -307,6 +307,7 @@
     <script src="js/active.js"></script>
     <script src="js/public.js"></script>
     <script>
+    
     //主頁顯示熱門課程
     $.ajax({
 		url : '../course/showCourseByType',
@@ -317,18 +318,19 @@
 			console.log(data);
 			var len = data.length;
 			for(var i=0;i<len;i++){
+				var o = JSON.stringify(data[i]);
 				$("#primaryCourse").append(""
 					+"<div class='col-12 col-lg-6'>"
 	                +    "<div class='single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp' data-wow-delay='400ms'>"
 	                +        "<div class='popular-course-content'>"
-	                +            "<h5>"+data[i].courseName+"</h5>"
+	                +            "<h5 class='courseName'>"+data[i].courseName+"</h5>"
 	                +            "<span>By "+data[i].user.trueName+"   |  "+data[i].createTime+"</span>"
 	                +            "<div class='course-ratings ranks'>"
 	                +			 "<span class='rank_flag' style='display:none'>"+data[i].rank+"</span>"
 	                +            "</div>"
 	                +            "<h5>￥："+data[i].price+"元"+"   |  "+data[i].period+"课时</h5>"
 	                +            "<p>"+data[i].courseDescribe+"</p>"
-	                +            "<a href='#' class='btn academy-btn btn-sm'>购买</a>"
+	                +            "<a href='javascript:addFavorite("+o+")' class='btn academy-btn btn-sm'>收藏</a>"
 	                +        "</div>"
 	                +       "<div class='popular-course-thumb bg-img' style='background-image: url("+data[i].pic+");'></div>"
 	                +   "</div>"
@@ -351,6 +353,36 @@
 			alert("尚未登录");
 		}
 	});
+    
+    
+   function addFavorite(data){
+	  var courseName = data.courseName;
+	  var contact = data.user.trueName;
+	  var price = data.price;
+	  var pic = data.pic;
+	  var favorite = {
+			  "courseName" :courseName,
+			  "contact" : contact,
+			  "coursePrice" : price,
+			  "picture" : pic
+	  }
+	  console.log(favorite);
+	  
+	  
+	  $.ajax({
+			url : '../favourite/addFavorite',
+			type : 'POST',
+			dataType : 'text',
+			data : favorite,
+			success : function(data){
+				alert(data);
+			},
+			error : function(){
+				alert("出了一些问题");
+			}
+			
+		});
+   }
     </script>
 </body>
 

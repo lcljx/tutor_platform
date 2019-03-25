@@ -5,6 +5,9 @@ public class Course {
 	private Integer id;
 	private TutorType type;
 	
+	private Integer typeId;//专用于发布课程或发布任务界面
+	private Integer userId;//专用于发布课程或发布任务界面
+	
 	private String courseName;
 	private Double price;
 	private String courseDescribe;
@@ -88,5 +91,17 @@ public class Course {
 	}
 	public void setPic(String pic) {
 		this.pic = pic;
+	}
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer integer) {
+		this.userId = integer;
+	}
+	public Integer getTypeId() {
+		return typeId;
+	}
+	public void setTypeId(Integer typeId) {
+		this.typeId = typeId;
 	}
 }

@@ -35,6 +35,10 @@ public class UserServiceImpl implements UserService{
 		String password = null;
 		String result = "";
 		String random = null;
+		boolean flag = false;
+		if(user.getEmail()==null) {
+			flag = true;
+		}
         JSONObject json = (JSONObject)request.getSession().getAttribute("code");
         try {
         	
@@ -48,7 +52,7 @@ public class UserServiceImpl implements UserService{
 		    	
 		    	user.setStatus(1);//1表示可用账号，0表示注销账号
 		    	user.setRole("3 ");
-		    	if(user.getUserName()==null&&user.getEmail()==null) {
+		    	if(flag) {
 		    		//将原始密码加盐（上面生成的盐），并且用md5算法加密三次，将最后结果存入数据库中
 		    		random=new SecureRandomNumberGenerator().nextBytes().toHex();
 		    		password = new Md5Hash(user.getPass(),random,3).toString();
@@ -182,6 +186,12 @@ public class UserServiceImpl implements UserService{
 	public List<String> getRoleByUsername(String userName) {
 		// TODO Auto-generated method stub
 		return userDao.getRoleByUsername(userName);
+	}
+
+	@Override
+	public boolean updateUser(User user) {
+		// TODO Auto-generated method stub
+		return userDao.updateUser(user);
 	}
 	
 }

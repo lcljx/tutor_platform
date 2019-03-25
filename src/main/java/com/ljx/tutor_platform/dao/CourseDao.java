@@ -19,4 +19,9 @@ public interface CourseDao {
 
 	boolean delCourse(Integer id);
 
+	boolean createCourse(Course course);
+
+	List<Course> getMyCourse(int currentId);
+	
+
 }

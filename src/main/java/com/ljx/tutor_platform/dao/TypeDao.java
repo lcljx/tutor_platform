@@ -18,5 +18,4 @@ public interface TypeDao {
 	boolean delType(String id);
 
 	boolean editType(TutorType tutorType);
-
 }

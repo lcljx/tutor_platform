@@ -101,6 +101,7 @@ public class UserController{
     	}
 		return msg;
     }
+    
     /**
 	 * 退出当前账户
      * @throws IOException 
@@ -114,6 +115,18 @@ public class UserController{
     	}else {
     		response.sendRedirect(request.getContextPath()+"/manage/login.html");
     	}
+    }
+    
+    /**
+	 * 修改个人信息
+     * @throws IOException 
+	 * */
+    @RequestMapping(value="/updateUser")
+    public void updateUser(User user,HttpServletRequest request,HttpServletResponse response) throws IOException{
+    	//id = null;
+    	boolean flag = userService.updateUser(user);
+    	if(flag)
+    		response.sendRedirect(request.getContextPath()+"/manage/personal.html");
     }
  
 }
