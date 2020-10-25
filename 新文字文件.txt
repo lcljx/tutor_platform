@@ -1,1 +1,1 @@
-第一次提交
+git log --pretty=oneline
