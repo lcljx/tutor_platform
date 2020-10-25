@@ -1,1 +1,2 @@
 git log --pretty=oneline  //显示commit记录
+git add 文件路径 //将文件提交到缓存区
